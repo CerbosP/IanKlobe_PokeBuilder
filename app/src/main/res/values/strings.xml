@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">IanKlobe_PokeBuilder</string>
+    <string name="poke_builder">PokéBuilder</string>
+    <string-array name="generations">
+        <item name="All">No filter</item>
+        <item name="Gen 1">Gen 1 - Kanto</item>
+        <item name="Gen 2">Gen 2 - Johto</item>
+        <item name="Gen 3">Gen 3 - Hoenn</item>
+        <item name="Gen 4">Gen 4 - Sinnoh</item>
+        <item name="Gen 5">Gen 5 - Unova</item>
+        <item name="Gen 6">Gen 6 - Kalos</item>
+        <item name="Gen 7">Gen 7 - Alola</item>
+        <item name="Gen 8">Gen 8 - Galar</item>
+        <item name="Forms">Alternate Forms</item>
+    </string-array>
+</resources>

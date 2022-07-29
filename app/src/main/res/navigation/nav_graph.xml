@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_starting_page">
+
+    <fragment
+        android:id="@+id/nav_starting_page"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.StartingPageFragment">
+
+        <action
+            android:id="@+id/action_starting_page_to_filter"
+            app:destination="@id/nav_filter"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_filter"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.FilterFragment">
+
+        <action
+            android:id="@+id/action_filter_to_poke_list"
+            app:destination="@id/nav_poke_list"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_poke_list"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.PokeListFragment">
+
+        <argument
+            android:name="generation_filter"
+            android:defaultValue="No Filter"
+            app:argType="string"/>
+
+    </fragment>
+
+</navigation>
