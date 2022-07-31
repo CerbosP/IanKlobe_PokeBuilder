@@ -33,6 +33,21 @@
             android:defaultValue="No Filter"
             app:argType="string"/>
 
+        <argument
+            android:name="shiny_filter"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
+        <argument
+            android:name="type_filter"
+            android:defaultValue="Bug"
+            app:argType="string"/>
+
+        <argument
+            android:name="filter_filter"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
     </fragment>
 
 </navigation>

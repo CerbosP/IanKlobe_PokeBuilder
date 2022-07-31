@@ -2,6 +2,7 @@ package com.example.ianklobe_pokebuilder.api
 
 import com.example.ianklobe_pokebuilder.model.PokeResponse
 import com.example.ianklobe_pokebuilder.model.SinglePokeResponse
+import com.example.ianklobe_pokebuilder.model.TypeResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,4 +25,9 @@ interface PokeApi {
     suspend fun getSinglePokemon(
         @Path("name") name: String
     ): Response<SinglePokeResponse>
+
+    @GET("type/{name}")
+    suspend fun getPokemonByType(
+        @Path("name") type: String
+    ): Response<TypeResponse>
 }
