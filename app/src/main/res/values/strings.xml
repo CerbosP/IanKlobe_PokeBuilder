@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">IanKlobe_PokeBuilder</string>
     <string name="poke_builder">PokéBuilder</string>
+    <string name="height">Height = %1$d\' %2$d\"</string>
     <string-array name="generations">
         <item name="All">No filter</item>
         <item name="Gen 1">Gen 1 - Kanto</item>

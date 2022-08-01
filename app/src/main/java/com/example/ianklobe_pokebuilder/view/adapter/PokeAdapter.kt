@@ -4,18 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.PokeListItemBinding
 import com.example.ianklobe_pokebuilder.model.PokeResponseData
-import com.example.ianklobe_pokebuilder.model.TypeResponseData
-import com.example.ianklobe_pokebuilder.utils.BALL_GIF
 import com.example.ianklobe_pokebuilder.utils.getPicUrl
 import com.example.ianklobe_pokebuilder.utils.getPicUrlShiny
+import java.util.*
 
 class PokeAdapter(
-    private val pokeList: MutableList<PokeResponseData> = mutableListOf()
-): RecyclerView.Adapter<PokeAdapter.PokeViewHolder>() {
+    private val pokeList: MutableList<PokeResponseData> = mutableListOf(),
+    private val openDetails: (PokeResponseData) -> Unit
+) : RecyclerView.Adapter<PokeAdapter.PokeViewHolder>() {
 
     private var wantShiny: Boolean = false
 
@@ -35,12 +34,16 @@ class PokeAdapter(
 
     inner class PokeViewHolder(
         private val binding: PokeListItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(data: PokeResponseData) {
-            binding.tvPokeName.text = data.name.capitalize()
+            binding.tvPokeName.text = data.name.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.getDefault()
+                ) else it.toString()
+            }
 
-            if(wantShiny){
+            if (wantShiny) {
                 Glide.with(binding.ivPokeSprite)
                     .load(data.url.getPicUrlShiny())
                     .placeholder(R.drawable.ball_loading)
@@ -55,10 +58,14 @@ class PokeAdapter(
                     .dontAnimate()
                     .into(binding.ivPokeSprite)
             }
+
+            binding.root.setOnClickListener{
+                openDetails(data)
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokeAdapter.PokeViewHolder {
         return PokeViewHolder(
             PokeListItemBinding.inflate(
                 LayoutInflater.from(parent.context),

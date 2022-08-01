@@ -6,10 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ianklobe_pokebuilder.api.PokeRepository
+import com.example.ianklobe_pokebuilder.model.PokeResponseData
+import com.example.ianklobe_pokebuilder.model.SinglePokeResponse
 import com.example.ianklobe_pokebuilder.model.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import javax.inject.Inject
@@ -58,10 +61,19 @@ class PokeViewModel @Inject constructor(
         }
     }
 
+    fun getSinglePokemon(name: String) {
+        viewModelScope.launch {
+            repository.getSinglePokemon(name).collect {
+                _pokeDetails.postValue(it)
+            }
+        }
+    }
+
     /*
         Using these set functions to start the opening fragments in the loading state.
         This way they the api is only called when the fragment is first opened.
      */
     fun setPokeLoadingState() { _pokeList.value = UIState.Loading }
     fun setTypeLoadingState() { _pokeTypeList.value = UIState.Loading }
+    fun setDetailLoadingState() { _pokeDetails.value = UIState.Loading}
 }

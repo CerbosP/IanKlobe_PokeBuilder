@@ -1,15 +1,16 @@
 package com.example.ianklobe_pokebuilder.view.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentPokeListBinding
-import com.example.ianklobe_pokebuilder.model.PokeResponse
-import com.example.ianklobe_pokebuilder.model.TypeResponse
-import com.example.ianklobe_pokebuilder.model.UIState
+import com.example.ianklobe_pokebuilder.model.*
 import com.example.ianklobe_pokebuilder.utils.*
 import com.example.ianklobe_pokebuilder.view.adapter.PokeAdapter
 import com.example.ianklobe_pokebuilder.view.adapter.TypeAdapter
@@ -19,11 +20,11 @@ class PokeListFragment : ViewModelFragment() {
     val args: PokeListFragmentArgs by navArgs()
 
     private val pokeAdapter by lazy {
-        PokeAdapter()
+        PokeAdapter(openDetails = ::openDetails)
     }
 
     private val typeAdapter by lazy {
-        TypeAdapter()
+        TypeAdapter(openDetails = ::openDetails)
     }
 
 
@@ -36,6 +37,10 @@ class PokeListFragment : ViewModelFragment() {
         binding = FragmentPokeListBinding.inflate(layoutInflater)
 
         configureObserver(args.filterFilter)
+
+        binding.ibtnBackList.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return binding.root
     }
@@ -100,7 +105,8 @@ class PokeListFragment : ViewModelFragment() {
                             }
                             typeAdapter.setTypeList((uiState.response as TypeResponse).pokemon)
                             rvPokemon.adapter = typeAdapter
-
+                            val color = binding.root.resources.getIntArray(R.array.types_codes)
+                            binding.root.setBackgroundColor(color[args.typeNumber])
                         }
                     }
                 }
@@ -134,11 +140,17 @@ class PokeListFragment : ViewModelFragment() {
                             tvLoadingText.visibility = View.GONE
                             pokeAdapter.setPokeList((uiState.response as PokeResponse).results)
                             pokeAdapter.setShiny(args.shinyFilter)
+                            root.setBackgroundColor(resources.getColor(R.color.logo_yellow))
                             rvPokemon.adapter = pokeAdapter
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun openDetails(pokeResponseData: PokeResponseData) {
+        viewModel.setDetailLoadingState()
+        findNavController().navigate(PokeListFragmentDirections.actionPokeListToPokeDetail(pokeResponseData))
     }
 }

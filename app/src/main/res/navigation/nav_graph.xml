@@ -28,6 +28,10 @@
         android:id="@+id/nav_poke_list"
         android:name="com.example.ianklobe_pokebuilder.view.fragment.PokeListFragment">
 
+        <action
+            android:id="@+id/action_poke_list_to_poke_detail"
+            app:destination="@id/nav_poke_detail"/>
+
         <argument
             android:name="generation_filter"
             android:defaultValue="No Filter"
@@ -44,10 +48,24 @@
             app:argType="string"/>
 
         <argument
+            android:name="type_number"
+            android:defaultValue="0"
+            app:argType="integer"/>
+
+        <argument
             android:name="filter_filter"
             android:defaultValue="false"
             app:argType="boolean"/>
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_poke_detail"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.PokeDetailsFragment">
+
+        <argument
+            android:name="pokemon_choice"
+            app:argType="com.example.ianklobe_pokebuilder.model.PokeResponseData"/>
     </fragment>
 
 </navigation>

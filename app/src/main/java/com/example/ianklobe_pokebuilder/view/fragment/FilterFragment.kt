@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ianklobe_pokebuilder.databinding.FragmentFilterBinding
 
@@ -33,6 +32,7 @@ class FilterFragment: ViewModelFragment() {
                         .setFilterFilter(filterType)
                         .setGenerationFilter(binding.spnGens.selectedItem.toString())
                         .setTypeFilter(binding.spnTypes.selectedItem.toString().lowercase())
+                        .setTypeNumber(binding.spnTypes.selectedItemPosition)
                         .setShinyFilter(binding.swcShiny.isChecked)
                 )
             } else {

@@ -11,9 +11,11 @@ import com.example.ianklobe_pokebuilder.model.TypeResponseData
 import com.example.ianklobe_pokebuilder.utils.extractId
 import com.example.ianklobe_pokebuilder.utils.getPicUrl
 import com.example.ianklobe_pokebuilder.utils.getPicUrlShiny
+import java.util.*
 
 class TypeAdapter (
-    private val typeList: MutableList<TypeResponseData> = mutableListOf()
+    private val typeList: MutableList<TypeResponseData> = mutableListOf(),
+    private val openDetails: (PokeResponseData) -> Unit
 ): RecyclerView.Adapter<TypeAdapter.TypeViewHolder>() {
 
     private var wantShiny: Boolean = false
@@ -47,7 +49,11 @@ class TypeAdapter (
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(data: PokeResponseData) {
-            binding.tvPokeName.text = data.name.capitalize()
+            binding.tvPokeName.text = data.name.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.getDefault()
+                ) else it.toString()
+            }
 
             if(wantShiny){
                 Glide.with(binding.ivPokeSprite)
@@ -63,6 +69,10 @@ class TypeAdapter (
                     .thumbnail(Glide.with(binding.ivPokeSprite).load(R.drawable.ball_loading))
                     .dontAnimate()
                     .into(binding.ivPokeSprite)
+            }
+
+            binding.root.setOnClickListener{
+                openDetails(data)
             }
         }
     }
