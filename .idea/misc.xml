@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/d.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/logo_border.xml" value="0.2155" />
         <entry key="app/src/main/res/font/chango.xml" value="0.325" />
         <entry key="app/src/main/res/font/lobster.xml" value="0.32395833333333335" />

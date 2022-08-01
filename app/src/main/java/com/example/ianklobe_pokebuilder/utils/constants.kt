@@ -18,5 +18,5 @@ const val GEN_SEVEN_OFFSET = 721
 const val GEN_EIGHT_OFFSET = 809
 const val FORM_OFFSET = 905
 const val BASE_URL = "https://pokeapi.co/api/v2/"
-const val BALL_GIF = "https://www.deviantart.com/termatior0/art/Pokeball-gif-662893232"
+const val BASE_STAT_MAX = 255
 

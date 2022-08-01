@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PokeResponseData(
-    val name: String,
-    val url: String
+data class StatSpecific(
+    val name: String
 ): Parcelable

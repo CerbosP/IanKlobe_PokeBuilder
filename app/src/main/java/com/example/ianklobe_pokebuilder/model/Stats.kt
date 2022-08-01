@@ -5,9 +5,8 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PokeSprite(
-    @SerializedName("front_default")
-    val frontDefault: String,
-    @SerializedName("front_shiny")
-    val frontShiny: String
+data class Stats(
+    @SerializedName("base_stat")
+    val baseStat: Int,
+    val stat: StatSpecific
 ): Parcelable

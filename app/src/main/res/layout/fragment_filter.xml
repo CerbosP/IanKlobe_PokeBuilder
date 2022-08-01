@@ -4,17 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/swc_filter_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TYPE?"
+        app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
+        app:layout_constraintStart_toStartOf="@id/btn_pokemon_search"
+        app:layout_constraintEnd_toEndOf="@id/btn_pokemon_search"/>
+
     <Spinner
         android:id="@+id/spn_gens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:entries="@array/generations"
         app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spn_types"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <Spinner
+        android:id="@+id/spn_types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/types"
+        app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/spn_gens"
+        app:layout_constraintTop_toTopOf="parent"/>
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/swc_shiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shiny?"
+        app:layout_constraintTop_toBottomOf="@id/btn_pokemon_search"
+        app:layout_constraintStart_toStartOf="@id/btn_pokemon_search"
+        app:layout_constraintEnd_toEndOf="@id/btn_pokemon_search"/>
 
     <Button
         android:id="@+id/btn_pokemon_search"

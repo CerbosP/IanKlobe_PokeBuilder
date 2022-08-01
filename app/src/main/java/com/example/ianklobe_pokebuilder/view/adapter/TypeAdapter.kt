@@ -7,34 +7,46 @@ import com.bumptech.glide.Glide
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.PokeListItemBinding
 import com.example.ianklobe_pokebuilder.model.PokeResponseData
+import com.example.ianklobe_pokebuilder.model.TypeResponseData
+import com.example.ianklobe_pokebuilder.utils.extractId
 import com.example.ianklobe_pokebuilder.utils.getPicUrl
 import com.example.ianklobe_pokebuilder.utils.getPicUrlShiny
 import java.util.*
 
-class PokeAdapter(
-    private val pokeList: MutableList<PokeResponseData> = mutableListOf(),
+class TypeAdapter (
+    private val typeList: MutableList<TypeResponseData> = mutableListOf(),
     private val openDetails: (PokeResponseData) -> Unit
-) : RecyclerView.Adapter<PokeAdapter.PokeViewHolder>() {
+): RecyclerView.Adapter<TypeAdapter.TypeViewHolder>() {
 
     private var wantShiny: Boolean = false
+    private var genEnd: Int = 0
+    private var genStart: Int = 0
 
     fun setShiny(value: Boolean) {
         wantShiny = value
     }
 
-    fun getShiny(): Boolean {
-        return wantShiny
+    fun setGenEnd(value: Int) {
+        genEnd = value
     }
 
-    fun setPokeList(newList: List<PokeResponseData>) {
-        pokeList.clear()
-        pokeList.addAll(newList)
-        notifyDataSetChanged()
+    fun setGenStart(value: Int) {
+        genStart = value
     }
 
-    inner class PokeViewHolder(
+    fun setTypeList(newList: List<TypeResponseData>) {
+        typeList.clear()
+        for(data in newList) {
+            if(data.pokemon.url.extractId() > genStart && data.pokemon.url.extractId() < genEnd) {
+                typeList.add(data)
+            }
+            notifyDataSetChanged()
+        }
+    }
+
+    inner class TypeViewHolder(
         private val binding: PokeListItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ): RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(data: PokeResponseData) {
             binding.tvPokeName.text = data.name.replaceFirstChar {
@@ -43,7 +55,7 @@ class PokeAdapter(
                 ) else it.toString()
             }
 
-            if (wantShiny) {
+            if(wantShiny){
                 Glide.with(binding.ivPokeSprite)
                     .load(data.url.getPicUrlShiny())
                     .placeholder(R.drawable.ball_loading)
@@ -65,8 +77,8 @@ class PokeAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokeAdapter.PokeViewHolder {
-        return PokeViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypeAdapter.TypeViewHolder {
+        return TypeViewHolder(
             PokeListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -75,11 +87,11 @@ class PokeAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: PokeViewHolder, position: Int) {
-        holder.onBind(pokeList[position])
+    override fun onBindViewHolder(holder: TypeAdapter.TypeViewHolder, position: Int) {
+        holder.onBind(typeList[position].pokemon)
     }
 
     override fun getItemCount(): Int {
-        return pokeList.size
+        return typeList.size
     }
 }
