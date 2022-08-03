@@ -1,4 +1,4 @@
-package com.example.ianklobe_pokebuilder.model
+package com.example.ianklobe_pokebuilder.model.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

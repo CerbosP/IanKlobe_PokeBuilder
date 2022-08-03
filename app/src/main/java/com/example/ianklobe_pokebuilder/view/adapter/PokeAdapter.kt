@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.PokeListItemBinding
-import com.example.ianklobe_pokebuilder.model.PokeResponseData
+import com.example.ianklobe_pokebuilder.model.response.PokeResponseData
+import com.example.ianklobe_pokebuilder.utils.format
 import com.example.ianklobe_pokebuilder.utils.getPicUrl
 import com.example.ianklobe_pokebuilder.utils.getPicUrlShiny
-import java.util.*
 
 class PokeAdapter(
     private val pokeList: MutableList<PokeResponseData> = mutableListOf(),
@@ -37,11 +37,7 @@ class PokeAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(data: PokeResponseData) {
-            binding.tvPokeName.text = data.name.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(
-                    Locale.getDefault()
-                ) else it.toString()
-            }
+            binding.tvPokeName.text = data.name.format()
 
             if (wantShiny) {
                 Glide.with(binding.ivPokeSprite)

@@ -1,23 +1,24 @@
 package com.example.ianklobe_pokebuilder.view.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentPokeListBinding
-import com.example.ianklobe_pokebuilder.model.*
+import com.example.ianklobe_pokebuilder.model.response.PokeResponse
+import com.example.ianklobe_pokebuilder.model.response.PokeResponseData
+import com.example.ianklobe_pokebuilder.model.response.TypeResponse
+import com.example.ianklobe_pokebuilder.model.states.UIState
 import com.example.ianklobe_pokebuilder.utils.*
 import com.example.ianklobe_pokebuilder.view.adapter.PokeAdapter
 import com.example.ianklobe_pokebuilder.view.adapter.TypeAdapter
 
 class PokeListFragment : ViewModelFragment() {
-    lateinit var binding: FragmentPokeListBinding
-    val args: PokeListFragmentArgs by navArgs()
+    private lateinit var binding: FragmentPokeListBinding
+    private val args: PokeListFragmentArgs by navArgs()
 
     private val pokeAdapter by lazy {
         PokeAdapter(openDetails = ::openDetails)
@@ -62,7 +63,7 @@ class PokeListFragment : ViewModelFragment() {
                             tvLoadingText.visibility = View.GONE
                             typeAdapter.setShiny(args.shinyFilter)
                             when (args.generationFilter) {
-                                "No filter" -> {
+                                "All Pokémon" -> {
                                     typeAdapter.setGenStart(0)
                                     typeAdapter.setGenEnd(10250)
                                 }
@@ -118,7 +119,7 @@ class PokeListFragment : ViewModelFragment() {
                 when (uiState) {
                     is UIState.Loading -> {
                         when (args.generationFilter) {
-                            "No filter" -> { viewModel.getPokemon(1154, 0) }
+                            "All Pokémon" -> { viewModel.getPokemon(1154, 0) }
                             "Gen 1 - Kanto" -> { viewModel.getPokemon(GEN_ONE, 0) }
                             "Gen 2 - Johto" -> { viewModel.getPokemon(GEN_TWO, GEN_TWO_OFFSET) }
                             "Gen 3 - Hoenn" -> { viewModel.getPokemon(GEN_THREE, GEN_THREE_OFFSET) }

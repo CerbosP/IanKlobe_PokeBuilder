@@ -6,13 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ianklobe_pokebuilder.api.PokeRepository
-import com.example.ianklobe_pokebuilder.model.PokeResponseData
-import com.example.ianklobe_pokebuilder.model.SinglePokeResponse
-import com.example.ianklobe_pokebuilder.model.UIState
+import com.example.ianklobe_pokebuilder.model.states.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import javax.inject.Inject

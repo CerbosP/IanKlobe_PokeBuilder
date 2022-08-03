@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.ianklobe_pokebuilder.databinding.FragmentFilterBinding
+import com.google.android.material.snackbar.Snackbar
+
+
+
 
 class FilterFragment: ViewModelFragment() {
-    lateinit var binding: FragmentFilterBinding
-    var filterType: Boolean = false
+    private lateinit var binding: FragmentFilterBinding
+    private var filterType: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,9 +21,25 @@ class FilterFragment: ViewModelFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFilterBinding.inflate(layoutInflater)
+        binding.spnTypes.visibility = if(filterType) { View.VISIBLE }
+        else { View.GONE }
 
         binding.swcFilterType.setOnClickListener {
             filterType = binding.swcFilterType.isChecked
+
+            binding.spnTypes.visibility = if(filterType) { View.VISIBLE }
+            else { View.GONE }
+        }
+
+        binding.swcShiny.setOnClickListener {
+            if(binding.swcShiny.isChecked)
+            Snackbar.make(binding.root,
+                    "Warning! Some alternate forms shiny sprites may not load.",
+                    Snackbar.LENGTH_LONG)
+                .setAction("UNDO", View.OnClickListener {
+                    binding.swcShiny.isChecked = false
+                })
+                .show()
         }
 
 

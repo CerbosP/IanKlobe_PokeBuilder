@@ -1,4 +1,4 @@
-package com.example.ianklobe_pokebuilder.model
+package com.example.ianklobe_pokebuilder.model.response
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -9,5 +9,7 @@ data class SinglePokeResponse(
     val sprites: PokeSprite,
     val stats: List<Stats>,
     val height: Int,
-    val weight: Int
+    val weight: Int,
+    val types: List<PokeTypes>,
+    val abilities: List<PokeAbilities>
 ): Parcelable

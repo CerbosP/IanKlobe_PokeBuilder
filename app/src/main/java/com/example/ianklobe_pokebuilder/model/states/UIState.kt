@@ -1,4 +1,4 @@
-package com.example.ianklobe_pokebuilder.model
+package com.example.ianklobe_pokebuilder.model.states
 
 sealed class UIState {
     object Loading: UIState()
