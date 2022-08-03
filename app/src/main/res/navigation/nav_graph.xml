@@ -65,7 +65,7 @@
 
         <argument
             android:name="pokemon_choice"
-            app:argType="com.example.ianklobe_pokebuilder.model.PokeResponseData"/>
+            app:argType="com.example.ianklobe_pokebuilder.model.response.PokeResponseData"/>
     </fragment>
 
 </navigation>

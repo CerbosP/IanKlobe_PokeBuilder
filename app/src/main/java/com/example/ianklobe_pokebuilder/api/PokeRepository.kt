@@ -1,6 +1,6 @@
 package com.example.ianklobe_pokebuilder.api
 
-import com.example.ianklobe_pokebuilder.model.UIState
+import com.example.ianklobe_pokebuilder.model.states.UIState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

@@ -9,13 +9,13 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentPokeDetailsBinding
-import com.example.ianklobe_pokebuilder.model.SinglePokeResponse
-import com.example.ianklobe_pokebuilder.model.UIState
-import java.util.*
+import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
+import com.example.ianklobe_pokebuilder.model.states.UIState
+import com.example.ianklobe_pokebuilder.utils.format
 
 class PokeDetailsFragment: ViewModelFragment() {
-    lateinit var binding: FragmentPokeDetailsBinding
-    val args: PokeDetailsFragmentArgs by navArgs()
+    private lateinit var binding: FragmentPokeDetailsBinding
+    private val args: PokeDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +24,7 @@ class PokeDetailsFragment: ViewModelFragment() {
     ): View? {
         binding = FragmentPokeDetailsBinding.inflate(layoutInflater)
 
-        binding.btnBack.setOnClickListener {
+        binding.ibtnBackList.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -63,10 +63,46 @@ class PokeDetailsFragment: ViewModelFragment() {
                             .dontAnimate()
                             .into(ivShinySpriteDetail)
 
-                        tvPokeNameDetail.text = pokemon.name.replaceFirstChar {
-                            if (it.isLowerCase()) it.titlecase(
-                                Locale.getDefault()
-                            ) else it.toString()
+                        tvPokeNameDetail.text = pokemon.name.format()
+
+                        val color = binding.root.resources.getIntArray(R.array.types_codes)
+                        val typeList = binding.root.resources.getStringArray(R.array.types)
+
+                        tvTypeOneDetail.text = pokemon.types[0].type.name.format()
+
+                        tvTypeOneDetail.setBackgroundColor(
+                            color[typeList.indexOf(tvTypeOneDetail.text.toString())])
+
+                        if(pokemon.types.size > 1) {
+                            tvTypeTwoDetail.visibility = View.VISIBLE
+                            tvTypeTwoDetail.text = pokemon.types[1].type.name.format()
+
+                            tvTypeTwoDetail.setBackgroundColor(
+                                color[typeList.indexOf(tvTypeTwoDetail.text.toString())])
+                        }
+
+
+
+                        tvAbilityOneDetail.text = pokemon.abilities[0].ability.name.format()
+
+                        when (pokemon.abilities.size) {
+                            1 -> {
+                                tvAbilityTwoDetail.visibility = View.GONE
+                                tvAbilityThreeDetail.visibility = View.GONE
+                            }
+                            2 -> {
+                                if(pokemon.abilities[1].hiddenAbility) {
+                                    tvAbilityThreeDetail.text = pokemon.abilities[1].ability.name.format()
+                                    tvAbilityTwoDetail.visibility = View.GONE
+                                } else {
+                                    tvAbilityTwoDetail.text = pokemon.abilities[1].ability.name.format()
+                                    tvAbilityThreeDetail.visibility = View.GONE
+                                }
+                            }
+                            3 -> {
+                                tvAbilityTwoDetail.text = pokemon.abilities[1].ability.name.format()
+                                tvAbilityThreeDetail.text = pokemon.abilities[2].ability.name.format()
+                            }
                         }
 
                         progressCircularHp.progress = pokemon.stats[0].baseStat
@@ -84,11 +120,12 @@ class PokeDetailsFragment: ViewModelFragment() {
                         tvSpeStatValue.text = pokemon.stats[5].baseStat.toString()
 
                         val heightCalc = getHeight(pokemon.height)
-                        val weightCalc = getWeight(pokemon.weight)
+                        val weightCalc = String.format("%.2f",getWeight(pokemon.weight))
                         tvHeightValue.text = resources.getString(R.string.height
                             ,heightCalc/12
                             ,heightCalc%12)
-                        tvWeightValue.text = "Weight = ${String.format("%.2f",weightCalc)} lbs"
+                        tvWeightValue.text = resources.getString(R.string.weight
+                            ,weightCalc)
                     }
                 }
             }
