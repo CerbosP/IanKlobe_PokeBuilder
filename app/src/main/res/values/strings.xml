@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">IanKlobe_PokeBuilder</string>
     <string name="poke_builder">PokéBuilder</string>
-    <string name="height">Height = %1$d\' %2$d\"</string>
-    <string name="weight">Weight = %1$s lbs</string>
+    <string name="height">Height\n%1$d\' %2$d\"</string>
+    <string name="weight">Weight\n%1$s lbs</string>
+    <string name="nope">Cannot find Pokémon</string>
     <string-array name="generations">
         <item name="All">All Pokémon</item>
         <item name="Gen 1">Gen 1 - Kanto</item>
@@ -34,5 +35,18 @@
         <item>"Rock"</item>
         <item>"Steel"</item>
         <item>"Water"</item>
+    </string-array>
+
+    <string-array name="names">
+        <item>"bulbasaur"</item>
+        <item>"venasaur"</item>
+        <item>"ivysaur"</item>
+        <item>"squirtle"</item>
+        <item>"wartortle"</item>
+        <item>"hitmonlee"</item>
+        <item>"hitmonchan"</item>
+        <item>"hitmontop"</item>
+        <item>"ditto"</item>
+        <item>"deino"</item>
     </string-array>
 </resources>

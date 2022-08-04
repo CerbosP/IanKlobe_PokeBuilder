@@ -22,6 +22,10 @@
             android:id="@+id/action_filter_to_poke_list"
             app:destination="@id/nav_poke_list"/>
 
+        <action
+            android:id="@+id/action_filter_to_poke_detail"
+            app:destination="@id/nav_poke_detail"/>
+
     </fragment>
 
     <fragment
@@ -65,7 +69,14 @@
 
         <argument
             android:name="pokemon_choice"
-            app:argType="com.example.ianklobe_pokebuilder.model.response.PokeResponseData"/>
+            app:argType="com.example.ianklobe_pokebuilder.model.response.PokeResponseData"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+
+        <argument
+            android:name="pokemon_name"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
 
 </navigation>
