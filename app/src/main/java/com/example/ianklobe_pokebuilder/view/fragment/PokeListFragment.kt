@@ -65,7 +65,7 @@ class PokeListFragment : ViewModelFragment() {
                             when (args.generationFilter) {
                                 "All Pokémon" -> {
                                     typeAdapter.setGenStart(0)
-                                    typeAdapter.setGenEnd(10250)
+                                    typeAdapter.setGenEnd(FORMS_END)
                                 }
                                 "Gen 1 - Kanto" -> {
                                     typeAdapter.setGenStart(0)
@@ -100,8 +100,8 @@ class PokeListFragment : ViewModelFragment() {
                                     typeAdapter.setGenEnd(FORM_OFFSET+1)
                                 }
                                 "Alternate Forms" -> {
-                                    typeAdapter.setGenStart(10000)
-                                    typeAdapter.setGenEnd(10250)
+                                    typeAdapter.setGenStart(FORMS_START)
+                                    typeAdapter.setGenEnd(FORMS_END)
                                 }
                             }
                             typeAdapter.setTypeList((uiState.response as TypeResponse).pokemon)
@@ -119,7 +119,7 @@ class PokeListFragment : ViewModelFragment() {
                 when (uiState) {
                     is UIState.Loading -> {
                         when (args.generationFilter) {
-                            "All Pokémon" -> { viewModel.getPokemon(1154, 0) }
+                            "All Pokémon" -> { viewModel.getPokemon(TOTAL_MONS, 0) }
                             "Gen 1 - Kanto" -> { viewModel.getPokemon(GEN_ONE, 0) }
                             "Gen 2 - Johto" -> { viewModel.getPokemon(GEN_TWO, GEN_TWO_OFFSET) }
                             "Gen 3 - Hoenn" -> { viewModel.getPokemon(GEN_THREE, GEN_THREE_OFFSET) }
@@ -152,6 +152,7 @@ class PokeListFragment : ViewModelFragment() {
 
     private fun openDetails(pokeResponseData: PokeResponseData) {
         viewModel.setDetailLoadingState()
-        findNavController().navigate(PokeListFragmentDirections.actionPokeListToPokeDetail(pokeResponseData))
+        findNavController().navigate(PokeListFragmentDirections.actionPokeListToPokeDetail()
+            .setPokemonChoice(pokeResponseData))
     }
 }

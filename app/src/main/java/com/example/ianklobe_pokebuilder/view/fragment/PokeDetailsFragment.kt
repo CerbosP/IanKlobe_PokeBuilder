@@ -11,7 +11,7 @@ import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentPokeDetailsBinding
 import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
 import com.example.ianklobe_pokebuilder.model.states.UIState
-import com.example.ianklobe_pokebuilder.utils.format
+import com.example.ianklobe_pokebuilder.utils.formatName
 
 class PokeDetailsFragment: ViewModelFragment() {
     private lateinit var binding: FragmentPokeDetailsBinding
@@ -37,7 +37,7 @@ class PokeDetailsFragment: ViewModelFragment() {
         viewModel.pokeDetails.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is UIState.Loading -> {
-                    viewModel.getSinglePokemon(args.pokemonChoice.name)
+                    viewModel.getSinglePokemon(args.pokemonChoice?.name ?: args.pokemonName)
                 }
                 is UIState.Error -> {
                     binding.pbLoadingDetail.visibility = View.GONE
@@ -45,6 +45,20 @@ class PokeDetailsFragment: ViewModelFragment() {
                 }
                 is UIState.Success<*> -> {
                     binding.apply {
+                        progressCircularAtk.visibility = View.VISIBLE
+                        progressCircularHp.visibility = View.VISIBLE
+                        progressCircularDef.visibility = View.VISIBLE
+                        progressCircularSpd.visibility = View.VISIBLE
+                        progressCircularSpe.visibility = View.VISIBLE
+                        progressCircularSpa.visibility = View.VISIBLE
+
+                        tvSpaStat.visibility = View.VISIBLE
+                        tvAtkStat.visibility = View.VISIBLE
+                        tvSpeStat.visibility = View.VISIBLE
+                        tvDefStat.visibility = View.VISIBLE
+                        tvSpdStat.visibility = View.VISIBLE
+                        tvHpStat.visibility = View.VISIBLE
+
                         pbLoadingDetail.visibility = View.GONE
                         tvLoadingTextDetail.visibility = View.GONE
                         val pokemon = (state.response as SinglePokeResponse)
@@ -63,19 +77,19 @@ class PokeDetailsFragment: ViewModelFragment() {
                             .dontAnimate()
                             .into(ivShinySpriteDetail)
 
-                        tvPokeNameDetail.text = pokemon.name.format()
+                        tvPokeNameDetail.text = pokemon.name.formatName()
 
                         val color = binding.root.resources.getIntArray(R.array.types_codes)
                         val typeList = binding.root.resources.getStringArray(R.array.types)
 
-                        tvTypeOneDetail.text = pokemon.types[0].type.name.format()
+                        tvTypeOneDetail.text = pokemon.types[0].type.name.formatName()
 
                         tvTypeOneDetail.setBackgroundColor(
                             color[typeList.indexOf(tvTypeOneDetail.text.toString())])
 
                         if(pokemon.types.size > 1) {
                             tvTypeTwoDetail.visibility = View.VISIBLE
-                            tvTypeTwoDetail.text = pokemon.types[1].type.name.format()
+                            tvTypeTwoDetail.text = pokemon.types[1].type.name.formatName()
 
                             tvTypeTwoDetail.setBackgroundColor(
                                 color[typeList.indexOf(tvTypeTwoDetail.text.toString())])
@@ -83,7 +97,7 @@ class PokeDetailsFragment: ViewModelFragment() {
 
 
 
-                        tvAbilityOneDetail.text = pokemon.abilities[0].ability.name.format()
+                        tvAbilityOneDetail.text = pokemon.abilities[0].ability.name.formatName()
 
                         when (pokemon.abilities.size) {
                             1 -> {
@@ -92,16 +106,16 @@ class PokeDetailsFragment: ViewModelFragment() {
                             }
                             2 -> {
                                 if(pokemon.abilities[1].hiddenAbility) {
-                                    tvAbilityThreeDetail.text = pokemon.abilities[1].ability.name.format()
+                                    tvAbilityThreeDetail.text = pokemon.abilities[1].ability.name.formatName()
                                     tvAbilityTwoDetail.visibility = View.GONE
                                 } else {
-                                    tvAbilityTwoDetail.text = pokemon.abilities[1].ability.name.format()
+                                    tvAbilityTwoDetail.text = pokemon.abilities[1].ability.name.formatName()
                                     tvAbilityThreeDetail.visibility = View.GONE
                                 }
                             }
                             3 -> {
-                                tvAbilityTwoDetail.text = pokemon.abilities[1].ability.name.format()
-                                tvAbilityThreeDetail.text = pokemon.abilities[2].ability.name.format()
+                                tvAbilityTwoDetail.text = pokemon.abilities[1].ability.name.formatName()
+                                tvAbilityThreeDetail.text = pokemon.abilities[2].ability.name.formatName()
                             }
                         }
 
@@ -121,6 +135,7 @@ class PokeDetailsFragment: ViewModelFragment() {
 
                         val heightCalc = getHeight(pokemon.height)
                         val weightCalc = String.format("%.2f",getWeight(pokemon.weight))
+
                         tvHeightValue.text = resources.getString(R.string.height
                             ,heightCalc/12
                             ,heightCalc%12)

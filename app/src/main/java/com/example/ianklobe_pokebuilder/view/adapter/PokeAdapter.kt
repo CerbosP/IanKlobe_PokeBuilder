@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.PokeListItemBinding
 import com.example.ianklobe_pokebuilder.model.response.PokeResponseData
-import com.example.ianklobe_pokebuilder.utils.format
+import com.example.ianklobe_pokebuilder.utils.formatName
 import com.example.ianklobe_pokebuilder.utils.getPicUrl
 import com.example.ianklobe_pokebuilder.utils.getPicUrlShiny
 
@@ -37,7 +37,7 @@ class PokeAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(data: PokeResponseData) {
-            binding.tvPokeName.text = data.name.format()
+            binding.tvPokeName.text = data.name.formatName()
 
             if (wantShiny) {
                 Glide.with(binding.ivPokeSprite)
