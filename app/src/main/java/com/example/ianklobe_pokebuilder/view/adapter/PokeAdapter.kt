@@ -46,6 +46,7 @@ class PokeAdapter(
         fun onBind(data: PokeResponseData) {
             binding.tvPokeName.text = data.name.formatName()
 
+            // Test
             Glide.with(binding.ivPokeSprite)
                 .load(data.url.getPicUrl(wantShiny))
                 .placeholder(R.drawable.ball_loading)
