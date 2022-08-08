@@ -4,6 +4,7 @@
     <string name="height">Height\n%1$d\' %2$d\"</string>
     <string name="weight">Weight\n%1$s lbs</string>
     <string name="nope">Cannot find Pokémon</string>
+    <string name="account">Create an account</string>
     <string-array name="generations">
         <item name="All">All Pokémon</item>
         <item name="Gen 1">Gen 1 - Kanto</item>

@@ -22,4 +22,3 @@ const val FORMS_START = 10000
 const val FORMS_END = 10250
 const val BASE_URL = "https://pokeapi.co/api/v2/"
 const val BASE_STAT_MAX = 255
-

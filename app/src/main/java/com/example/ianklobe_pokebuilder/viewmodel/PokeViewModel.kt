@@ -29,7 +29,9 @@ class PokeViewModel @Inject constructor(
     // For logging errors of the coroutine
     private val coroutineExceptionHandler by lazy {
         CoroutineExceptionHandler { coroutineContext, throwable ->
-            Log.e(TAG, "Context: $coroutineContext\nMessage: ${throwable.localizedMessage}", throwable)
+            Log.e(TAG,
+                "Context: $coroutineContext\nMessage: ${throwable.localizedMessage}",
+                throwable)
         }
     }
 

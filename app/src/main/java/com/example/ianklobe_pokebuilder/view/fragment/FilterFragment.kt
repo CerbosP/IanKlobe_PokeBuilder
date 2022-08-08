@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.widget.addTextChangedListener
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.fragment.findNavController
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentFilterBinding
@@ -15,10 +15,9 @@ import com.example.ianklobe_pokebuilder.utils.TOTAL_MONS
 import com.example.ianklobe_pokebuilder.utils.deformatName
 import com.example.ianklobe_pokebuilder.utils.toPokeList
 import com.google.android.material.snackbar.Snackbar
-import java.lang.Thread.sleep
 
 
-class FilterFragment: ViewModelFragment() {
+class FilterFragment: PokeViewModelFragment() {
     private lateinit var binding: FragmentFilterBinding
     private var filterType: Boolean = false
 
@@ -48,8 +47,8 @@ class FilterFragment: ViewModelFragment() {
         binding.swcShiny.setOnClickListener {
             if(binding.swcShiny.isChecked)
             Snackbar.make(binding.root,
-                    "Warning! Some alternate forms shiny sprites may not load.",
-                    Snackbar.LENGTH_LONG)
+                "Warning! Some alternate forms shiny sprites may not load.",
+                Snackbar.LENGTH_LONG)
                 .setAction("UNDO", View.OnClickListener {
                     binding.swcShiny.isChecked = false
                 })
@@ -61,10 +60,21 @@ class FilterFragment: ViewModelFragment() {
         binding.btnPokemonSearch.setOnClickListener {
             when(binding.rgFilterOptions.checkedRadioButtonId) {
                 binding.rbNameFilter.id -> {
-                    viewModel.setDetailLoadingState()
-                    findNavController().navigate(FilterFragmentDirections
-                        .actionFilterToPokeDetail()
-                        .setPokemonName(binding.actvNameFilter.text.toString().deformatName()))
+                    if(binding.actvNameFilter.text.isNotBlank()) {
+                        viewModel.setDetailLoadingState()
+                        findNavController().navigate(
+                            FilterFragmentDirections
+                                .actionFilterToPokeDetail()
+                                .setPokemonName(
+                                    binding.actvNameFilter.text.toString().trim().deformatName()
+                                )
+                        )
+                    } else {
+                        Snackbar.make(binding.root,
+                            "Name filter cannot be empty or blank. Please use autofill to help find your pokemon.",
+                            Snackbar.LENGTH_LONG)
+                            .show()
+                    }
                 }
                 binding.rbGenFilter.id -> {
                     if(filterType) {

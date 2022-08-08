@@ -16,7 +16,7 @@ import com.example.ianklobe_pokebuilder.utils.*
 import com.example.ianklobe_pokebuilder.view.adapter.PokeAdapter
 import com.example.ianklobe_pokebuilder.view.adapter.TypeAdapter
 
-class PokeListFragment : ViewModelFragment() {
+class PokeListFragment : PokeViewModelFragment() {
     private lateinit var binding: FragmentPokeListBinding
     private val args: PokeListFragmentArgs by navArgs()
 

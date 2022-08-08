@@ -13,7 +13,7 @@ import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
 import com.example.ianklobe_pokebuilder.model.states.UIState
 import com.example.ianklobe_pokebuilder.utils.formatName
 
-class PokeDetailsFragment: ViewModelFragment() {
+class PokeDetailsFragment: PokeViewModelFragment() {
     private lateinit var binding: FragmentPokeDetailsBinding
     private val args: PokeDetailsFragmentArgs by navArgs()
 
@@ -41,6 +41,7 @@ class PokeDetailsFragment: ViewModelFragment() {
                 }
                 is UIState.Error -> {
                     binding.pbLoadingDetail.visibility = View.GONE
+                    binding.ivErrorImage.visibility = View.VISIBLE
                     binding.tvLoadingTextDetail.text = state.error.message
                 }
                 is UIState.Success<*> -> {
