@@ -4,6 +4,7 @@ import com.example.ianklobe_pokebuilder.api.PokeApi
 import com.example.ianklobe_pokebuilder.api.PokeRepository
 import com.example.ianklobe_pokebuilder.api.PokeRepositoryImpl
 import com.example.ianklobe_pokebuilder.utils.BASE_URL
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,9 +39,9 @@ class HiltModule {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-            .connectTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
-            .writeTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
             .build()
     }
 
@@ -51,4 +52,8 @@ class HiltModule {
     @Singleton
     @Provides
     fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+    @Singleton
+    @Provides
+    fun providesFirebase(): FirebaseAuth = FirebaseAuth.getInstance()
 }

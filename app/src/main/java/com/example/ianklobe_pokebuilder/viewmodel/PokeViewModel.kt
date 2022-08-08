@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ianklobe_pokebuilder.api.PokeRepository
-import com.example.ianklobe_pokebuilder.model.UIState
+import com.example.ianklobe_pokebuilder.model.states.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -29,15 +29,17 @@ class PokeViewModel @Inject constructor(
     // For logging errors of the coroutine
     private val coroutineExceptionHandler by lazy {
         CoroutineExceptionHandler { coroutineContext, throwable ->
-            Log.e(TAG, "Context: $coroutineContext\nMessage: ${throwable.localizedMessage}", throwable)
+            Log.e(TAG,
+                "Context: $coroutineContext\nMessage: ${throwable.localizedMessage}",
+                throwable)
         }
     }
 
     private val _pokeList = MutableLiveData<UIState>()
     val pokeList: LiveData<UIState> get() = _pokeList
 
-    private val _pokeSpeList = MutableLiveData<UIState>()
-    val pokeSpeList: LiveData<UIState> get() = _pokeSpeList
+    private val _pokeTypeList = MutableLiveData<UIState>()
+    val pokeTypeList: LiveData<UIState> get() = _pokeTypeList
 
     private val _pokeDetails = MutableLiveData<UIState>()
     val pokeDetails: LiveData<UIState> get() = _pokeDetails
@@ -50,10 +52,10 @@ class PokeViewModel @Inject constructor(
         }
     }
 
-    fun getSinglePokemon(id: Int) {
+    fun getPokemonByType(type: String) {
         viewModelScope.launch {
-            repository.getSinglePokemon(id).collect {
-                _pokeSpeList.postValue(it)
+            repository.getPokemonByType(type).collect {
+                _pokeTypeList.postValue(it)
             }
         }
     }
@@ -61,7 +63,7 @@ class PokeViewModel @Inject constructor(
     fun getSinglePokemon(name: String) {
         viewModelScope.launch {
             repository.getSinglePokemon(name).collect {
-                _pokeSpeList.postValue(it)
+                _pokeDetails.postValue(it)
             }
         }
     }
@@ -70,5 +72,7 @@ class PokeViewModel @Inject constructor(
         Using these set functions to start the opening fragments in the loading state.
         This way they the api is only called when the fragment is first opened.
      */
-    fun setLoadingState() { _pokeList.value = UIState.Loading }
+    fun setPokeLoadingState() { _pokeList.value = UIState.Loading }
+    fun setTypeLoadingState() { _pokeTypeList.value = UIState.Loading }
+    fun setDetailLoadingState() { _pokeDetails.value = UIState.Loading}
 }

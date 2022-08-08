@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "239979014271",
+    "project_id": "pokebuilder-a8b55",
+    "storage_bucket": "pokebuilder-a8b55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239979014271:android:f7c1b10b8379bf7685774a",
+        "android_client_info": {
+          "package_name": "com.example.ianklobe_pokebuilder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239979014271-qdd9im747rm0r6asnou2bnhl6rf9lgj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj303764a7wnv-xHdDzQXcBYw5PN8aPK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239979014271-qdd9im747rm0r6asnou2bnhl6rf9lgj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

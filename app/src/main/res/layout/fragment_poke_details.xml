@@ -1,6 +1,476 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/logo_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibtn_back_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_button"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/tv_city_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:text="PokéBuilder"/>
+
+    </Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp">
+
+            <ProgressBar
+                android:id="@+id/pb_loading_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_loading_text_detail"
+                app:layout_constraintStart_toEndOf="@id/tv_loading_text_detail"
+                app:layout_constraintTop_toTopOf="@id/tv_loading_text_detail" />
+
+            <ImageView
+                android:id="@+id/iv_error_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/error_ball"
+                android:layout_marginStart="10dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@id/tv_loading_text_detail"
+                app:layout_constraintStart_toStartOf="@id/tv_loading_text_detail"
+                app:layout_constraintEnd_toEndOf="@id/tv_loading_text_detail"/>
+
+            <TextView
+                android:id="@+id/tv_loading_text_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retrieving Pokemon"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_poke_sprite_detail"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toStartOf="@id/iv_shiny_sprite_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_poke_name_detail"
+                tools:src="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/iv_shiny_sprite_detail"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_poke_sprite_detail"
+                app:layout_constraintTop_toBottomOf="@id/tv_poke_name_detail"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tv_poke_name_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/tv_type_one_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Alolan Exegcutor" />
+
+            <TextView
+                android:id="@+id/tv_type_one_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tv_poke_name_detail"
+                app:layout_constraintEnd_toStartOf="@id/tv_type_two_detail"
+                app:layout_constraintStart_toEndOf="@id/tv_poke_name_detail"
+                app:layout_constraintTop_toTopOf="@id/tv_poke_name_detail"
+                tools:background="@color/dragon"
+                tools:text="Dragon" />
+
+            <TextView
+                android:id="@+id/tv_type_two_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/tv_poke_name_detail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_type_one_detail"
+                app:layout_constraintTop_toTopOf="@id/tv_poke_name_detail"
+                tools:background="@color/grass"
+                tools:text="Grass" />
+
+            <ProgressBar
+                android:id="@+id/progress_circular_hp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:max="255"
+                android:progress="170"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:secondaryProgress="255"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_height_value" />
+
+            <TextView
+                android:id="@+id/tv_hp_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:text="HP"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_hp"
+                app:layout_constraintStart_toEndOf="@id/progress_circular_hp"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_hp" />
+
+            <TextView
+                android:id="@+id/tv_hp_stat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_hp"
+                app:layout_constraintEnd_toEndOf="@id/progress_circular_hp"
+                app:layout_constraintStart_toStartOf="@id/progress_circular_hp"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_hp" />
+
+            <ProgressBar
+                android:id="@+id/progress_circular_atk"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:max="255"
+                android:progress="170"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:secondaryProgress="255"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_height_value" />
+
+            <TextView
+                android:id="@+id/tv_atk_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
+                android:text="Attack"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_atk"
+                app:layout_constraintEnd_toStartOf="@id/progress_circular_atk"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_atk" />
+
+            <TextView
+                android:id="@+id/tv_atk_stat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_atk"
+                app:layout_constraintEnd_toEndOf="@id/progress_circular_atk"
+                app:layout_constraintStart_toStartOf="@id/progress_circular_atk"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_atk" />
+
+            <ProgressBar
+                android:id="@+id/progress_circular_def"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:max="255"
+                android:progress="170"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:secondaryProgress="255"
+                app:layout_constraintBottom_toTopOf="@id/progress_circular_spd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular_hp" />
+
+            <TextView
+                android:id="@+id/tv_def_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:text="Defense"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_def"
+                app:layout_constraintStart_toEndOf="@id/progress_circular_def"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_def" />
+
+            <TextView
+                android:id="@+id/tv_def_stat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_def"
+                app:layout_constraintEnd_toEndOf="@id/progress_circular_def"
+                app:layout_constraintStart_toStartOf="@id/progress_circular_def"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_def" />
+
+            <ProgressBar
+                android:id="@+id/progress_circular_spa"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:max="255"
+                android:progress="170"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:secondaryProgress="255"
+                app:layout_constraintBottom_toTopOf="@id/progress_circular_spe"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular_atk" />
+
+            <TextView
+                android:id="@+id/tv_spa_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
+                android:text="Special\nAttack"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_spa"
+                app:layout_constraintEnd_toStartOf="@id/progress_circular_spa"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_spa" />
+
+            <TextView
+                android:id="@+id/tv_spa_stat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_spa"
+                app:layout_constraintEnd_toEndOf="@id/progress_circular_spa"
+                app:layout_constraintStart_toStartOf="@id/progress_circular_spa"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_spa" />
+
+            <ProgressBar
+                android:id="@+id/progress_circular_spd"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:max="255"
+                android:progress="170"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:secondaryProgress="255"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular_def" />
+
+            <TextView
+                android:id="@+id/tv_spd_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:text="Special\nDefense"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_spd"
+                app:layout_constraintStart_toEndOf="@id/progress_circular_spd"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_spd" />
+
+            <TextView
+                android:id="@+id/tv_spd_stat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_spd"
+                app:layout_constraintEnd_toEndOf="@id/progress_circular_spd"
+                app:layout_constraintStart_toStartOf="@id/progress_circular_spd"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_spd" />
+
+            <ProgressBar
+                android:id="@+id/progress_circular_spe"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:max="255"
+                android:progress="170"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:secondaryProgress="255"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular_spa" />
+
+            <TextView
+                android:id="@+id/tv_spe_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
+                android:text="Speed"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_spe"
+                app:layout_constraintEnd_toStartOf="@id/progress_circular_spe"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_spe" />
+
+            <TextView
+                android:id="@+id/tv_spe_stat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/progress_circular_spe"
+                app:layout_constraintEnd_toEndOf="@id/progress_circular_spe"
+                app:layout_constraintStart_toStartOf="@id/progress_circular_spe"
+                app:layout_constraintTop_toTopOf="@id/progress_circular_spe" />
+
+            <TextView
+                android:id="@+id/tv_weight_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_height_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_poke_sprite_detail"
+                tools:text="Weight\n12kg" />
+
+            <TextView
+                android:id="@+id/tv_height_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_weight_value"
+                app:layout_constraintTop_toBottomOf="@id/iv_shiny_sprite_detail"
+                tools:text="Height\n12m" />
+
+            <TextView
+                android:id="@+id/tv_ability_one_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@id/btn_add_team"
+                app:layout_constraintEnd_toStartOf="@id/tv_ability_two_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular_spd"
+                tools:text="Rivalry" />
+
+            <TextView
+                android:id="@+id/tv_ability_two_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@id/btn_add_team"
+                app:layout_constraintEnd_toStartOf="@id/tv_ability_three_detail"
+                app:layout_constraintStart_toEndOf="@id/tv_ability_one_detail"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular_spd"
+                tools:text="Poison Point" />
+
+            <TextView
+                android:id="@+id/tv_ability_three_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/btn_add_team"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_ability_two_detail"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular_spd"
+                tools:text="Sheer Force" />
+
+            <Button
+                android:id="@+id/btn_add_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:clickable="false"
+                android:text="Coming Soon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

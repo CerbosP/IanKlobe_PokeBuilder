@@ -44,10 +44,11 @@
         app:layout_constraintEnd_toEndOf="@id/tv_logo_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Username"/>
+            android:hint="Email"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,11 +61,25 @@
         app:layout_constraintEnd_toEndOf="@id/til_username">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:inputType="textPassword"
             android:hint="Password"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_create_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="Create an account"
+        app:layout_constraintTop_toBottomOf="@id/til_password"
+        app:layout_constraintStart_toStartOf="@id/til_password"
+        app:layout_constraintEnd_toEndOf="@id/til_password"/>
 
     <Button
         android:id="@+id/btn_log_in"
@@ -73,6 +88,14 @@
         android:text="Start Browsing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_debug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-->"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 

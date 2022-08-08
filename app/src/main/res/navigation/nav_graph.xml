@@ -2,16 +2,29 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_starting_page">
+    app:startDestination="@id/nav_log_in">
 
     <fragment
-        android:id="@+id/nav_starting_page"
-        android:name="com.example.ianklobe_pokebuilder.view.fragment.StartingPageFragment">
+        android:id="@+id/nav_log_in"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.LogInFragment">
 
         <action
-            android:id="@+id/action_starting_page_to_filter"
+            android:id="@+id/action_log_in_to_filter"
             app:destination="@id/nav_filter"/>
 
+        <action
+            android:id="@+id/action_log_in_to_create_account"
+            app:destination="@id/nav_create_account"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_create_account"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.CreateAccountFragment">
+
+        <action
+            android:id="@+id/action_nav_create_account_to_filter"
+            app:destination="@id/nav_filter"/>
     </fragment>
 
     <fragment
@@ -22,17 +35,61 @@
             android:id="@+id/action_filter_to_poke_list"
             app:destination="@id/nav_poke_list"/>
 
+        <action
+            android:id="@+id/action_filter_to_poke_detail"
+            app:destination="@id/nav_poke_detail"/>
+
     </fragment>
 
     <fragment
         android:id="@+id/nav_poke_list"
         android:name="com.example.ianklobe_pokebuilder.view.fragment.PokeListFragment">
 
+        <action
+            android:id="@+id/action_poke_list_to_poke_detail"
+            app:destination="@id/nav_poke_detail"/>
+
         <argument
             android:name="generation_filter"
             android:defaultValue="No Filter"
             app:argType="string"/>
 
+        <argument
+            android:name="shiny_filter"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
+        <argument
+            android:name="type_filter"
+            android:defaultValue="Bug"
+            app:argType="string"/>
+
+        <argument
+            android:name="type_number"
+            android:defaultValue="0"
+            app:argType="integer"/>
+
+        <argument
+            android:name="filter_filter"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_poke_detail"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.PokeDetailsFragment">
+
+        <argument
+            android:name="pokemon_choice"
+            app:argType="com.example.ianklobe_pokebuilder.model.response.PokeResponseData"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+
+        <argument
+            android:name="pokemon_name"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
 
 </navigation>
