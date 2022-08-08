@@ -1,9 +1,17 @@
 package com.example.ianklobe_pokebuilder.view.adapter
 
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.PokeListItemBinding
 import com.example.ianklobe_pokebuilder.model.response.PokeResponseData
@@ -11,12 +19,11 @@ import com.example.ianklobe_pokebuilder.model.response.TypeResponseData
 import com.example.ianklobe_pokebuilder.utils.extractId
 import com.example.ianklobe_pokebuilder.utils.formatName
 import com.example.ianklobe_pokebuilder.utils.getPicUrl
-import com.example.ianklobe_pokebuilder.utils.getPicUrlShiny
 
-class TypeAdapter (
+class TypeAdapter(
     private val typeList: MutableList<TypeResponseData> = mutableListOf(),
     private val openDetails: (PokeResponseData) -> Unit
-): RecyclerView.Adapter<TypeAdapter.TypeViewHolder>() {
+) : RecyclerView.Adapter<TypeAdapter.TypeViewHolder>() {
 
     private var wantShiny: Boolean = false
     private var genEnd: Int = 0
@@ -36,8 +43,8 @@ class TypeAdapter (
 
     fun setTypeList(newList: List<TypeResponseData>) {
         typeList.clear()
-        for(data in newList) {
-            if(data.pokemon.url.extractId() in (genStart + 1) until genEnd) {
+        for (data in newList) {
+            if (data.pokemon.url.extractId() in (genStart + 1) until genEnd) {
                 typeList.add(data)
             }
             notifyDataSetChanged()
@@ -46,28 +53,58 @@ class TypeAdapter (
 
     inner class TypeViewHolder(
         private val binding: PokeListItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(data: PokeResponseData) {
             binding.tvPokeName.text = data.name.formatName()
 
-            if(wantShiny){
-                Glide.with(binding.ivPokeSprite)
-                    .load(data.url.getPicUrlShiny())
-                    .placeholder(R.drawable.ball_loading)
-                    .thumbnail(Glide.with(binding.ivPokeSprite).load(R.drawable.ball_loading))
-                    .dontAnimate()
-                    .into(binding.ivPokeSprite)
-            } else {
-                Glide.with(binding.ivPokeSprite)
-                    .load(data.url.getPicUrl())
-                    .placeholder(R.drawable.ball_loading)
-                    .thumbnail(Glide.with(binding.ivPokeSprite).load(R.drawable.ball_loading))
-                    .dontAnimate()
-                    .into(binding.ivPokeSprite)
-            }
+            Glide.with(binding.ivPokeSprite)
+                .load(data.url.getPicUrl(wantShiny))
+                .placeholder(R.drawable.ball_loading)
+                .thumbnail(Glide.with(binding.ivPokeSprite).load(R.drawable.ball_loading))
+                .dontAnimate()
+                .listener(object : RequestListener<Drawable> {
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        var dominantColor: Int
+                        val drawable = resource as BitmapDrawable
+                        val bitmap = drawable.bitmap
+                        Palette.Builder(bitmap).generate {
+                            it?.let { palette ->
+                                dominantColor = palette.getDominantColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.white
+                                    )
+                                )
 
-            binding.root.setOnClickListener{
+                                binding.ivPokeSprite.setBackgroundColor(dominantColor)
+
+
+                            }
+                        }
+                        return false
+                    }
+
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+
+                })
+                .into(binding.ivPokeSprite)
+
+
+            binding.root.setOnClickListener {
                 openDetails(data)
             }
         }
