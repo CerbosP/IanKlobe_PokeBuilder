@@ -85,16 +85,17 @@
         android:id="@+id/btn_log_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Browsing"
+        android:text="Login and Browse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/btn_debug"/>
 
     <Button
         android:id="@+id/btn_debug"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-->"
+        android:text="Browse"
+        app:layout_constraintStart_toEndOf="@id/btn_log_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

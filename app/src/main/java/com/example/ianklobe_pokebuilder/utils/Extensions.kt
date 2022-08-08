@@ -7,14 +7,10 @@ import com.example.ianklobe_pokebuilder.model.response.PokeResponse
 import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
 import java.util.*
 
-fun String.getPicUrl(): String {
+fun String.getPicUrl(shiny: Boolean): String {
     val id = this.extractId()
-    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png"
-}
-
-fun String.getPicUrlShiny(): String {
-    val id = this.extractId()
-    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png"
+    return if(shiny) "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png"
+    else "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png"
 }
 
 fun String.extractId() = this.substringAfter("pokemon").replace("/", "").toInt()
