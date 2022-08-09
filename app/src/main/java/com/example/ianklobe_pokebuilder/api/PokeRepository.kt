@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 interface PokeRepository {
     suspend fun getPokemon(limit: Int, offset: Int): Flow<UIState>
-    suspend fun getSinglePokemon(id: Int): Flow<UIState>
     suspend fun getSinglePokemon(name: String): Flow<UIState>
     suspend fun getPokemonByType(type: String): Flow<UIState>
 }
@@ -18,22 +17,6 @@ class PokeRepositoryImpl @Inject constructor(private val pokeApi: PokeApi) : Pok
         flow {
             try {
                 val response = pokeApi.getPokemon(limit = limit, offset = offset)
-                if (response.isSuccessful) {
-                    emit(response.body()?.let {
-                        UIState.Success(it)
-                    } ?: throw Exception("Null Response"))
-                } else {
-                    throw Exception("Failed network call")
-                }
-            } catch (e: Exception) {
-                emit(UIState.Error(e))
-            }
-        }
-
-    override suspend fun getSinglePokemon(id: Int): Flow<UIState> =
-        flow {
-            try {
-                val response = pokeApi.getSinglePokemon(id = id)
                 if (response.isSuccessful) {
                     emit(response.body()?.let {
                         UIState.Success(it)

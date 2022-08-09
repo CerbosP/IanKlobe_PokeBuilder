@@ -53,7 +53,7 @@ class PokeViewModel @Inject constructor(
     }
 
     fun getPokemonByType(type: String) {
-        viewModelScope.launch {
+        viewModelSafeScope.launch {
             repository.getPokemonByType(type).collect {
                 _pokeTypeList.postValue(it)
             }
@@ -61,7 +61,7 @@ class PokeViewModel @Inject constructor(
     }
 
     fun getSinglePokemon(name: String) {
-        viewModelScope.launch {
+        viewModelSafeScope.launch {
             repository.getSinglePokemon(name).collect {
                 _pokeDetails.postValue(it)
             }

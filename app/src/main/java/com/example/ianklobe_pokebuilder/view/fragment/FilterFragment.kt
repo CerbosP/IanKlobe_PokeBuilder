@@ -115,7 +115,7 @@ class FilterFragment: PokeViewModelFragment() {
                             ArrayAdapter(
                                 requireContext(),
                                 android.R.layout.select_dialog_item,
-                                (uiState.response as PokeResponse).toPokeList(requireContext())
+                                (uiState.response as PokeResponse).toPokeList()
                             )
                         )
                     }

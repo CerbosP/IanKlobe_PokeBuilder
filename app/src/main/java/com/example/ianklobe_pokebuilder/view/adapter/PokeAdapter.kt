@@ -60,21 +60,19 @@ class PokeAdapter(
                         dataSource: DataSource?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        var dominantColor: Int
+                        var color: Int
                         val drawable = resource as BitmapDrawable
                         val bitmap = drawable.bitmap
                         Palette.Builder(bitmap).generate {
                             it?.let { palette ->
-                                dominantColor = palette.getDominantColor(
+                                color = palette.getDominantColor(
                                     ContextCompat.getColor(
                                         binding.root.context,
                                         R.color.white
                                     )
                                 )
 
-                                binding.ivPokeSprite.setBackgroundColor(dominantColor)
-
-
+                                binding.ivPokeSprite.setBackgroundColor(color)
                             }
                         }
                         return false

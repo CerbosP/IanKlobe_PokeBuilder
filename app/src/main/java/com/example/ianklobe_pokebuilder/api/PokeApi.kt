@@ -16,11 +16,6 @@ interface PokeApi {
         @Query("offset") offset: Int
     ): Response<PokeResponse>
 
-    @GET("pokemon/{id}")
-    suspend fun getSinglePokemon(
-        @Path("id") id: Int
-    ): Response<SinglePokeResponse>
-
     @GET("pokemon/{name}")
     suspend fun getSinglePokemon(
         @Path("name") name: String

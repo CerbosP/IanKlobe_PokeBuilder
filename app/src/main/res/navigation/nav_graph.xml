@@ -10,11 +10,14 @@
 
         <action
             android:id="@+id/action_log_in_to_filter"
-            app:destination="@id/nav_filter"/>
+            app:destination="@id/nav_filter"
+            app:enterAnim="@anim/slide_up" />
 
         <action
             android:id="@+id/action_log_in_to_create_account"
-            app:destination="@id/nav_create_account"/>
+            app:destination="@id/nav_create_account"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down" />
 
     </fragment>
 
@@ -24,7 +27,8 @@
 
         <action
             android:id="@+id/action_nav_create_account_to_filter"
-            app:destination="@id/nav_filter"/>
+            app:destination="@id/nav_filter"
+            app:enterAnim="@anim/slide_up" />
     </fragment>
 
     <fragment
@@ -37,7 +41,11 @@
 
         <action
             android:id="@+id/action_filter_to_poke_detail"
-            app:destination="@id/nav_poke_detail"/>
+            app:destination="@id/nav_poke_detail"
+            app:enterAnim="@anim/slide_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_right"
+            app:popExitAnim="@anim/fade_out" />
 
     </fragment>
 
@@ -47,7 +55,11 @@
 
         <action
             android:id="@+id/action_poke_list_to_poke_detail"
-            app:destination="@id/nav_poke_detail"/>
+            app:destination="@id/nav_poke_detail"
+            app:enterAnim="@anim/slide_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_right"
+            app:popExitAnim="@anim/fade_out" />
 
         <argument
             android:name="generation_filter"
