@@ -30,6 +30,19 @@ fun String.deformatName(): String {
     }
 }
 
-fun PokeResponse.toPokeList(context: Context): List<String> {
+fun PokeResponse.toPokeList(): List<String> {
     return this.results.map { it.name.formatName() }
+}
+
+fun Int.convertHeight(): Int {
+    var newHeight: Double = this.toDouble()
+    newHeight *= 3.937
+    newHeight += 0.5
+    return newHeight.toInt()
+}
+
+fun Int.convertWeight(): Double {
+    var newWeight: Double = this.toDouble()
+    newWeight *= .2205
+    return newWeight
 }

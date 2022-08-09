@@ -1,5 +1,6 @@
 package com.example.ianklobe_pokebuilder.view.fragment
 
+import android.opengl.ETC1.getHeight
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentPokeDetailsBinding
 import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
 import com.example.ianklobe_pokebuilder.model.states.UIState
+import com.example.ianklobe_pokebuilder.utils.convertHeight
+import com.example.ianklobe_pokebuilder.utils.convertWeight
 import com.example.ianklobe_pokebuilder.utils.formatName
 
 class PokeDetailsFragment: PokeViewModelFragment() {
@@ -134,8 +137,8 @@ class PokeDetailsFragment: PokeViewModelFragment() {
                         tvSpdStatValue.text = pokemon.stats[4].baseStat.toString()
                         tvSpeStatValue.text = pokemon.stats[5].baseStat.toString()
 
-                        val heightCalc = getHeight(pokemon.height)
-                        val weightCalc = String.format("%.2f",getWeight(pokemon.weight))
+                        val heightCalc = pokemon.height.convertHeight()
+                        val weightCalc = String.format("%.2f",pokemon.weight.convertWeight())
 
                         tvHeightValue.text = resources.getString(R.string.height
                             ,heightCalc/12
@@ -146,20 +149,5 @@ class PokeDetailsFragment: PokeViewModelFragment() {
                 }
             }
         }
-    }
-
-    private fun getHeight(height: Int): Int {
-        var newHeight: Double = height.toDouble()
-        newHeight /= 10
-        newHeight *= 39.37
-        newHeight += 0.5
-        return newHeight.toInt()
-    }
-
-    private fun getWeight(weight: Int): Double {
-        var newWeight: Double = weight.toDouble()
-        newWeight /= 10
-        newWeight *= 2.205
-        return newWeight
     }
 }

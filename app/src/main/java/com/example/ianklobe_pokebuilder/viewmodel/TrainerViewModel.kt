@@ -34,19 +34,6 @@ class TrainerViewModel @Inject constructor(
     val currentTrainer: LiveData<FirebaseUser?>
         get() = _currentTrainer
 
-    private val viewModelSafeScope by lazy {
-        viewModelScope + coroutineExceptionHandler
-    }
-
-    // For logging errors of the coroutine
-    private val coroutineExceptionHandler by lazy {
-        CoroutineExceptionHandler { coroutineContext, throwable ->
-            Log.e(TAG,
-                "Context: $coroutineContext\nMessage: ${throwable.localizedMessage}",
-                throwable)
-        }
-    }
-
     fun createTrainer(email: String, password: String) {
         firebase.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
