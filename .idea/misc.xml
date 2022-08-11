@@ -5,12 +5,13 @@
       <map>
         <entry key="app/src/main/res/drawable/d.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/logo_border.xml" value="0.2155" />
+        <entry key="app/src/main/res/drawable/progress_bar_drawable.xml" value="0.1" />
         <entry key="app/src/main/res/font/chango.xml" value="0.325" />
         <entry key="app/src/main/res/font/lobster.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/fragment_create_account.xml" value="0.29375" />
-        <entry key="app/src/main/res/layout/fragment_filter.xml" value="0.29375" />
-        <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_filter.xml" value="0.2093645484949833" />
+        <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.33376363118489594" />
         <entry key="app/src/main/res/layout/fragment_poke_details.xml" value="0.33106635142180874" />
         <entry key="app/src/main/res/layout/fragment_poke_list.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/fragment_starting_page.xml" value="0.27285071803432137" />
