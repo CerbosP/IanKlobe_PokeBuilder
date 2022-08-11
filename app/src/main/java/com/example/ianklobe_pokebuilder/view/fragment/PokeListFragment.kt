@@ -141,7 +141,7 @@ class PokeListFragment : PokeViewModelFragment() {
                             tvLoadingText.visibility = View.GONE
                             pokeAdapter.setPokeList((uiState.response as PokeResponse).results)
                             pokeAdapter.setShiny(args.shinyFilter)
-                            root.setBackgroundColor(resources.getColor(R.color.logo_yellow))
+                            root.setBackgroundColor(resources.getColor(R.color.logo_blue))
                             rvPokemon.adapter = pokeAdapter
                         }
                     }
