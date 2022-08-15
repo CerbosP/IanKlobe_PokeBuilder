@@ -25,6 +25,9 @@ class CreateAccountFragment: TrainerViewModelFragment() {
             btnCreateAccount.setOnClickListener {
                 validateInput()
             }
+            btnCancelAccount.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
         return binding.root
     }
@@ -34,16 +37,10 @@ class CreateAccountFragment: TrainerViewModelFragment() {
         when{
             !passwordCheck(binding.tietInputPassword.text.toString().trim(),
                 binding.tietInputPasswordRepeat.text.toString().trim()) -> {
-                Snackbar.make(binding.root,
-                    "Passwords do not match",
-                    Snackbar.LENGTH_SHORT)
-                    .show()
+                binding.tietInputPasswordRepeat.error = "Passwords do not match"
             }
             !emailCheck(binding.tietInputEmail.text.toString().trim()) -> {
-                Snackbar.make(binding.root,
-                    "Invalid Email",
-                    Snackbar.LENGTH_SHORT)
-                    .show()
+                binding.tietInputEmail.error = "Email is invalid"
             }
             else -> {
                 viewModel.createTrainer(

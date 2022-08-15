@@ -29,10 +29,6 @@ class PokeAdapter(
         wantShiny = value
     }
 
-    fun getShiny(): Boolean {
-        return wantShiny
-    }
-
     fun setPokeList(newList: List<PokeResponseData>) {
         pokeList.clear()
         pokeList.addAll(newList)

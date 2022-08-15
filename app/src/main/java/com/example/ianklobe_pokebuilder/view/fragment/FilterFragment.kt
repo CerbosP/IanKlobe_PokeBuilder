@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.fragment.findNavController
 import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentFilterBinding

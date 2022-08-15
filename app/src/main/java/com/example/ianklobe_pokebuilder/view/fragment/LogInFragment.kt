@@ -16,7 +16,6 @@ import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.databinding.FragmentLogInBinding
 import com.example.ianklobe_pokebuilder.model.states.AccountStatus
 import com.google.android.material.snackbar.Snackbar
-import java.lang.Thread.sleep
 
 class LogInFragment: TrainerViewModelFragment() {
     private lateinit var binding: FragmentLogInBinding
@@ -36,11 +35,12 @@ class LogInFragment: TrainerViewModelFragment() {
                 and binding.tietInputPassword.text!!.isNotBlank())
             viewModel.signIn(binding.tietInputEmail.text.toString().trim(),
                 binding.tietInputPassword.text.toString().trim())
-            else
-                Snackbar.make(binding.root,
-                    "Email and password cannot be empty.",
-                    Snackbar.LENGTH_SHORT)
-                    .show()
+            else {
+                if(binding.tietInputEmail.text!!.isBlank())
+                    binding.tietInputEmail.error = "Email cannot be blank!"
+                if(binding.tietInputPassword.text!!.isBlank())
+                    binding.tietInputPassword.error = "Email cannot be blank!"
+            }
         }
 
         binding.btnDebug.setOnClickListener {
