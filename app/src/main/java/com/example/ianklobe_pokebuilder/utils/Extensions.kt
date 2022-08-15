@@ -1,10 +1,6 @@
 package com.example.ianklobe_pokebuilder.utils
 
-import android.content.Context
-import androidx.lifecycle.Transformations.map
-import com.example.ianklobe_pokebuilder.R
 import com.example.ianklobe_pokebuilder.model.response.PokeResponse
-import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
 import java.util.*
 
 fun String.getPicUrl(shiny: Boolean): String {

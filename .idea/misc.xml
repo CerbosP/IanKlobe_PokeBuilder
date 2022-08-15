@@ -10,8 +10,8 @@
         <entry key="app/src/main/res/font/lobster.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/fragment_create_account.xml" value="0.29375" />
-        <entry key="app/src/main/res/layout/fragment_filter.xml" value="0.2093645484949833" />
-        <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.33376363118489594" />
+        <entry key="app/src/main/res/layout/fragment_filter.xml" value="0.3671811215512387" />
+        <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.3132957721578663" />
         <entry key="app/src/main/res/layout/fragment_poke_details.xml" value="0.33106635142180874" />
         <entry key="app/src/main/res/layout/fragment_poke_list.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/fragment_starting_page.xml" value="0.27285071803432137" />

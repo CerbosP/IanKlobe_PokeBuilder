@@ -1,6 +1,5 @@
 package com.example.ianklobe_pokebuilder.view.fragment
 
-import android.opengl.ETC1.getHeight
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
