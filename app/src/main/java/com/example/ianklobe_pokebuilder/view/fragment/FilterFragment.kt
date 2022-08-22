@@ -1,7 +1,6 @@
 package com.example.ianklobe_pokebuilder.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,7 @@ class FilterFragment: PokeViewModelFragment() {
     private var filterType: Boolean = false
     private var gen: String = "All Pokémon"
     private var type: String = "Bug"
+    private var egg: String = "indeterminate"
     private var typeNum: Int = 0
 
     override fun onCreateView(
@@ -61,15 +61,19 @@ class FilterFragment: PokeViewModelFragment() {
             changeType(i)
         }
 
+        binding.rgEggOptions.setOnCheckedChangeListener { radioGroup, i ->
+            changeEggGroup(i)
+        }
+
         binding.swcShiny.setOnClickListener {
             if(binding.swcShiny.isChecked)
-            Snackbar.make(binding.root,
-                "Warning! Some alternate forms shiny sprites may not load.",
-                Snackbar.LENGTH_LONG)
-                .setAction("UNDO", View.OnClickListener {
-                    binding.swcShiny.isChecked = false
-                })
-                .show()
+                Snackbar.make(binding.root,
+                    "Warning! Some alternate forms shiny sprites may not load.",
+                    Snackbar.LENGTH_LONG)
+                    .setAction("UNDO", View.OnClickListener {
+                        binding.swcShiny.isChecked = false
+                    })
+                    .show()
         }
 
         configureObserver()
@@ -99,7 +103,7 @@ class FilterFragment: PokeViewModelFragment() {
                         findNavController().navigate(
                             FilterFragmentDirections
                                 .actionFilterToPokeList()
-                                .setFilterFilter(filterType)
+                                .setFilterFilter(1)
                                 .setGenerationFilter(gen)
                                 .setTypeFilter(type.lowercase())
                                 .setTypeNumber(typeNum)
@@ -110,11 +114,21 @@ class FilterFragment: PokeViewModelFragment() {
                         findNavController().navigate(
                             FilterFragmentDirections
                                 .actionFilterToPokeList()
-                                .setFilterFilter(filterType)
+                                .setFilterFilter(0)
                                 .setGenerationFilter(gen)
                                 .setShinyFilter(binding.swcShiny.isChecked)
                         )
                     }
+                }
+                binding.rbEggFilter.id -> {
+                    viewModel.setEggLoadingState()
+                    findNavController().navigate(
+                        FilterFragmentDirections
+                            .actionFilterToPokeList()
+                            .setFilterFilter(2)
+                            .setEggFilter(egg)
+                            .setShinyFilter(binding.swcShiny.isChecked)
+                    )
                 }
             }
         }
@@ -151,6 +165,7 @@ class FilterFragment: PokeViewModelFragment() {
         binding.apply {
             actvNameFilter.visibility = View.GONE
             tilNameFilter.visibility = View.GONE
+            rgEggOptions.visibility = View.GONE
             rgTypeOptions.visibility = if(filterType) { View.VISIBLE }
             else { View.GONE }
         }
@@ -170,6 +185,7 @@ class FilterFragment: PokeViewModelFragment() {
                     rbBug.isChecked
                     swcShiny.visibility = View.VISIBLE
                     swcFilterType.visibility = View.VISIBLE
+                    rgEggOptions.visibility = View.GONE
                     actvNameFilter.visibility = View.GONE
                     tilNameFilter.visibility = View.GONE
                 }
@@ -181,6 +197,17 @@ class FilterFragment: PokeViewModelFragment() {
                     actvNameFilter.visibility = View.VISIBLE
                     tilNameFilter.visibility = View.VISIBLE
                     actvNameFilter.setText("")
+                }
+                rbEggFilter.id -> {
+                    rgGenOptions.visibility = View.GONE
+                    rgTypeOptions.visibility = View.GONE
+                    swcShiny.visibility = View.GONE
+                    swcFilterType.visibility = View.GONE
+                    actvNameFilter.visibility = View.GONE
+                    tilNameFilter.visibility = View.GONE
+                    rgEggOptions.visibility = View.VISIBLE
+                    egg = "indeterminate"
+                    rbIndeterminateAmorphous.isChecked
                 }
             }
         }
@@ -276,7 +303,25 @@ class FilterFragment: PokeViewModelFragment() {
                 typeNum = 17
             }
         }
+    }
 
-        Log.e("TAG", "changeType: $type + $typeNum")
+    private fun changeEggGroup(state: Int) {
+        when(state) {
+            binding.rbIndeterminateAmorphous.id -> { egg = "indeterminate" }
+            binding.rbBugEgg.id -> { egg = "bug" }
+            binding.rbDitto.id -> { egg = "ditto" }
+            binding.rbDragonEgg.id -> { egg = "dragon" }
+            binding.rbFairyEgg.id -> { egg = "fairy" }
+            binding.rbFieldGround.id -> { egg = "ground" }
+            binding.rbFlyingEgg.id -> { egg = "flying" }
+            binding.rbGrassPlant.id -> { egg = "plant" }
+            binding.rbHumanlike.id -> { egg = "humanshape" }
+            binding.rbMineral.id -> { egg = "mineral" }
+            binding.rbMonster.id -> { egg = "monster" }
+            binding.rbWaterOne.id -> { egg = "water1" }
+            binding.rbWaterTwo.id -> { egg = "water2" }
+            binding.rbWaterThree.id -> { egg = "water3" }
+            binding.rbNoEggs.id -> { egg = "no-eggs" }
+        }
     }
 }

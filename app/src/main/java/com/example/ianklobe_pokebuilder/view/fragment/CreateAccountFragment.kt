@@ -10,7 +10,7 @@ import com.example.ianklobe_pokebuilder.databinding.FragmentCreateAccountBinding
 import com.example.ianklobe_pokebuilder.model.states.AccountStatus
 import com.google.android.material.snackbar.Snackbar
 
-class CreateAccountFragment: TrainerViewModelFragment() {
+class CreateAccountFragment: PokeViewModelFragment() {
     private lateinit var binding: FragmentCreateAccountBinding
 
     override fun onCreateView(

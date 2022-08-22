@@ -67,6 +67,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Name" />
+
+        <RadioButton
+            android:id="@+id/rb_egg_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Egg Group" />
     </RadioGroup>
 
 
@@ -365,14 +372,128 @@
 
     </HorizontalScrollView>
 
-    <!--    <Spinner-->
-    <!--        android:id="@+id/spn_types"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:entries="@array/types"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toEndOf="@id/spn_gens"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/rg_filter_options" />-->
+    <HorizontalScrollView
+        android:id="@+id/hsv_egg_groups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
+        app:layout_constraintTop_toBottomOf="@id/rg_filter_options">
+
+        <RadioGroup
+            android:id="@+id/rg_egg_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_indeterminate_amorphous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:checked="true"
+                android:text="Amorphous/Indeterminate" />
+
+            <RadioButton
+                android:id="@+id/rb_bug_egg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Bug" />
+
+            <RadioButton
+                android:id="@+id/rb_ditto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Ditto" />
+
+            <RadioButton
+                android:id="@+id/rb_dragon_egg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Dragon" />
+
+            <RadioButton
+                android:id="@+id/rb_fairy_egg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Fairy" />
+
+            <RadioButton
+                android:id="@+id/rb_field_ground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Field/Ground" />
+
+            <RadioButton
+                android:id="@+id/rb_grass_plant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Grass/Plant" />
+
+            <RadioButton
+                android:id="@+id/rb_flying_egg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Flying" />
+
+            <RadioButton
+                android:id="@+id/rb_humanlike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Human-Like" />
+
+            <RadioButton
+                android:id="@+id/rb_mineral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Mineral" />
+
+            <RadioButton
+                android:id="@+id/rb_monster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Monster" />
+
+            <RadioButton
+                android:id="@+id/rb_water_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Water 1" />
+
+            <RadioButton
+                android:id="@+id/rb_water_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Water 2" />
+
+            <RadioButton
+                android:id="@+id/rb_water_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="Water 3" />
+
+            <RadioButton
+                android:id="@+id/rb_no_eggs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="No Eggs" />
+
+        </RadioGroup>
+
+    </HorizontalScrollView>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/swc_shiny"

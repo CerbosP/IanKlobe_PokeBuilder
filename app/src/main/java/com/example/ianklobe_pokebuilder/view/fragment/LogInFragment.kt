@@ -17,7 +17,7 @@ import com.example.ianklobe_pokebuilder.databinding.FragmentLogInBinding
 import com.example.ianklobe_pokebuilder.model.states.AccountStatus
 import com.google.android.material.snackbar.Snackbar
 
-class LogInFragment: TrainerViewModelFragment() {
+class LogInFragment: PokeViewModelFragment() {
     private lateinit var binding: FragmentLogInBinding
 
     override fun onCreateView(
