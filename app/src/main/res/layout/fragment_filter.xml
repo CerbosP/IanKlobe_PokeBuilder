@@ -1,519 +1,525 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/logo_blue">
 
-    <Toolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/ibtn_back_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:src="@drawable/ic_back_button" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/ibtn_back_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="@drawable/ic_back_button" />
+
+            <TextView
+                android:id="@+id/tv_city_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="PokéBuilder"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <TextView
-            android:id="@+id/tv_city_list"
+            android:id="@+id/tv_filter_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="PokéBuilder"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:layout_marginTop="10dp"
+            android:text="FILTER CHOICE"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    </Toolbar>
-
-    <TextView
-        android:id="@+id/tv_filter_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="FILTER CHOICE"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <RadioGroup
-        android:id="@+id/rg_filter_options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_filter_title">
-
-        <RadioButton
-            android:id="@+id/rb_gen_filter"
+        <RadioGroup
+            android:id="@+id/rg_filter_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Gen/Type" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_filter_title">
 
-        <RadioButton
-            android:id="@+id/rb_name_filter"
+            <RadioButton
+                android:id="@+id/rb_gen_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Gen/Type" />
+
+            <RadioButton
+                android:id="@+id/rb_name_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Name" />
+
+            <RadioButton
+                android:id="@+id/rb_egg_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Egg Group" />
+        </RadioGroup>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxStrokeWidth="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rg_filter_options">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/actv_name_filter"
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Pokémon Name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swc_filter_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Name" />
+            android:text="Type?"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
+            app:layout_constraintEnd_toStartOf="@id/swc_shiny"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <RadioButton
-            android:id="@+id/rb_egg_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Egg Group" />
-    </RadioGroup>
+        <!--    <Spinner-->
+        <!--        android:id="@+id/spn_gens"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:entries="@array/generations"-->
+        <!--        app:layout_constraintEnd_toStartOf="@id/spn_types"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@id/rg_filter_options" />-->
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_name_filter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxStrokeWidth="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
-        app:layout_constraintTop_toBottomOf="@id/rg_filter_options">
-
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-            android:id="@+id/actv_name_filter"
-            style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+        <HorizontalScrollView
+            android:id="@+id/hsv_gen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Pokémon Name" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/rg_filter_options">
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/swc_filter_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Type?"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
-        app:layout_constraintEnd_toStartOf="@id/swc_shiny"
-        app:layout_constraintStart_toStartOf="parent" />
+            <RadioGroup
+                android:id="@+id/rg_gen_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <!--    <Spinner-->
-    <!--        android:id="@+id/spn_gens"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:entries="@array/generations"-->
-    <!--        app:layout_constraintEnd_toStartOf="@id/spn_types"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/rg_filter_options" />-->
+                <RadioButton
+                    android:id="@+id/rb_all"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:checked="true"
+                    android:drawableTop="@drawable/ball"
+                    android:gravity="center|center_horizontal"
+                    android:text="All Pokémon" />
 
-    <HorizontalScrollView
-        android:id="@+id/hsv_gen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/rg_filter_options">
+                <RadioButton
+                    android:id="@+id/rb_gen_one"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/oak"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 1 Kanto" />
 
-        <RadioGroup
-            android:id="@+id/rg_gen_options"
+                <RadioButton
+                    android:id="@+id/rb_gen_two"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/elm"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 2 Johto" />
+
+                <RadioButton
+                    android:id="@+id/rb_gen_three"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/birch"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 3 Hoenn" />
+
+                <RadioButton
+                    android:id="@+id/rb_gen_four"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/rowan"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 4 Sinnoh" />
+
+                <RadioButton
+                    android:id="@+id/rb_gen_five"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/juniper"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 5 Unova" />
+
+                <RadioButton
+                    android:id="@+id/rb_gen_six"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/sycamore"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 6 Kalos" />
+
+                <RadioButton
+                    android:id="@+id/rb_gen_seven"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/kukui"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 7 Alola" />
+
+                <RadioButton
+                    android:id="@+id/rb_gen_eight"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/sonia"
+                    android:gravity="center|center_horizontal"
+                    android:text="Gen 8 Galar" />
+
+                <RadioButton
+                    android:id="@+id/rb_gen_nine"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:drawableTop="@drawable/laventon"
+                    android:gravity="center|center_horizontal"
+                    android:text="Alternate Forms" />
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_types"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/swc_filter_type"
+            app:layout_constraintTop_toBottomOf="@id/hsv_gen">
+
+            <RadioGroup
+                android:id="@+id/rg_type_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_bug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:checked="true"
+                    android:text="Bug" />
+
+                <RadioButton
+                    android:id="@+id/rb_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Dark" />
+
+                <RadioButton
+                    android:id="@+id/rb_dragon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Dragon" />
+
+                <RadioButton
+                    android:id="@+id/rb_electric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Electric" />
+
+                <RadioButton
+                    android:id="@+id/rb_fairy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Fairy" />
+
+                <RadioButton
+                    android:id="@+id/rb_fighting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Fighting" />
+
+                <RadioButton
+                    android:id="@+id/rb_fire"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Fire" />
+
+                <RadioButton
+                    android:id="@+id/rb_flying"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Flying" />
+
+                <RadioButton
+                    android:id="@+id/rb_ghost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Ghost" />
+
+                <RadioButton
+                    android:id="@+id/rb_grass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Grass" />
+
+                <RadioButton
+                    android:id="@+id/rb_ground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Ground" />
+
+                <RadioButton
+                    android:id="@+id/rb_ice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Ice" />
+
+                <RadioButton
+                    android:id="@+id/rb_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Normal" />
+
+                <RadioButton
+                    android:id="@+id/rb_poison"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Poison" />
+
+                <RadioButton
+                    android:id="@+id/rb_psychic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Psychic" />
+
+                <RadioButton
+                    android:id="@+id/rb_rock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Rock" />
+
+                <RadioButton
+                    android:id="@+id/rb_steel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Steel" />
+
+                <RadioButton
+                    android:id="@+id/rb_water"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Water" />
+
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_egg_groups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
+            app:layout_constraintTop_toBottomOf="@id/rg_filter_options">
+
+            <RadioGroup
+                android:id="@+id/rg_egg_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_indeterminate_amorphous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:checked="true"
+                    android:text="Amorphous/Indeterminate" />
+
+                <RadioButton
+                    android:id="@+id/rb_bug_egg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Bug" />
+
+                <RadioButton
+                    android:id="@+id/rb_ditto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Ditto" />
+
+                <RadioButton
+                    android:id="@+id/rb_dragon_egg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Dragon" />
+
+                <RadioButton
+                    android:id="@+id/rb_fairy_egg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Fairy" />
+
+                <RadioButton
+                    android:id="@+id/rb_field_ground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Field/Ground" />
+
+                <RadioButton
+                    android:id="@+id/rb_grass_plant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Grass/Plant" />
+
+                <RadioButton
+                    android:id="@+id/rb_flying_egg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Flying" />
+
+                <RadioButton
+                    android:id="@+id/rb_humanlike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Human-Like" />
+
+                <RadioButton
+                    android:id="@+id/rb_mineral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Mineral" />
+
+                <RadioButton
+                    android:id="@+id/rb_monster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Monster" />
+
+                <RadioButton
+                    android:id="@+id/rb_water_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Water 1" />
+
+                <RadioButton
+                    android:id="@+id/rb_water_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Water 2" />
+
+                <RadioButton
+                    android:id="@+id/rb_water_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Water 3" />
+
+                <RadioButton
+                    android:id="@+id/rb_no_eggs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="No Eggs" />
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swc_shiny"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="15dp"
+            android:text="Shiny?"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/swc_filter_type"
+            app:layout_constraintTop_toTopOf="@id/swc_filter_type" />
 
-            <RadioButton
-                android:id="@+id/rb_all"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:checked="true"
-                android:drawableTop="@drawable/ball"
-                android:gravity="center|center_horizontal"
-                android:text="All Pokémon" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_one"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/oak"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 1 Kanto" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_two"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/elm"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 2 Johto" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_three"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/birch"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 3 Hoenn" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_four"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/rowan"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 4 Sinnoh" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_five"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/juniper"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 5 Unova" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_six"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/sycamore"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 6 Kalos" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_seven"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/kukui"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 7 Alola" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_eight"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/sonia"
-                android:gravity="center|center_horizontal"
-                android:text="Gen 8 Galar" />
-
-            <RadioButton
-                android:id="@+id/rb_gen_nine"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="4dp"
-                android:drawableTop="@drawable/laventon"
-                android:gravity="center|center_horizontal"
-                android:text="Alternate Forms" />
-
-        </RadioGroup>
-
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:id="@+id/hsv_types"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/swc_filter_type"
-        app:layout_constraintTop_toBottomOf="@id/hsv_gen">
-
-        <RadioGroup
-            android:id="@+id/rg_type_options"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_pokemon_search"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginHorizontal="10dp"
+            android:text="See Pokémon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <RadioButton
-                android:id="@+id/rb_bug"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:checked="true"
-                android:text="Bug" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <RadioButton
-                android:id="@+id/rb_dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Dark" />
-
-            <RadioButton
-                android:id="@+id/rb_dragon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Dragon" />
-
-            <RadioButton
-                android:id="@+id/rb_electric"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Electric" />
-
-            <RadioButton
-                android:id="@+id/rb_fairy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Fairy" />
-
-            <RadioButton
-                android:id="@+id/rb_fighting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Fighting" />
-
-            <RadioButton
-                android:id="@+id/rb_fire"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Fire" />
-
-            <RadioButton
-                android:id="@+id/rb_flying"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Flying" />
-
-            <RadioButton
-                android:id="@+id/rb_ghost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Ghost" />
-
-            <RadioButton
-                android:id="@+id/rb_grass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Grass" />
-
-            <RadioButton
-                android:id="@+id/rb_ground"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Ground" />
-
-            <RadioButton
-                android:id="@+id/rb_ice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Ice" />
-
-            <RadioButton
-                android:id="@+id/rb_normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Normal" />
-
-            <RadioButton
-                android:id="@+id/rb_poison"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Poison" />
-
-            <RadioButton
-                android:id="@+id/rb_psychic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Psychic" />
-
-            <RadioButton
-                android:id="@+id/rb_rock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Rock" />
-
-            <RadioButton
-                android:id="@+id/rb_steel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Steel" />
-
-            <RadioButton
-                android:id="@+id/rb_water"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Water" />
-
-
-        </RadioGroup>
-
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:id="@+id/hsv_egg_groups"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/btn_pokemon_search"
-        app:layout_constraintTop_toBottomOf="@id/rg_filter_options">
-
-        <RadioGroup
-            android:id="@+id/rg_egg_options"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rb_indeterminate_amorphous"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:checked="true"
-                android:text="Amorphous/Indeterminate" />
-
-            <RadioButton
-                android:id="@+id/rb_bug_egg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Bug" />
-
-            <RadioButton
-                android:id="@+id/rb_ditto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Ditto" />
-
-            <RadioButton
-                android:id="@+id/rb_dragon_egg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Dragon" />
-
-            <RadioButton
-                android:id="@+id/rb_fairy_egg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Fairy" />
-
-            <RadioButton
-                android:id="@+id/rb_field_ground"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Field/Ground" />
-
-            <RadioButton
-                android:id="@+id/rb_grass_plant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Grass/Plant" />
-
-            <RadioButton
-                android:id="@+id/rb_flying_egg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Flying" />
-
-            <RadioButton
-                android:id="@+id/rb_humanlike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Human-Like" />
-
-            <RadioButton
-                android:id="@+id/rb_mineral"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Mineral" />
-
-            <RadioButton
-                android:id="@+id/rb_monster"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Monster" />
-
-            <RadioButton
-                android:id="@+id/rb_water_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Water 1" />
-
-            <RadioButton
-                android:id="@+id/rb_water_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Water 2" />
-
-            <RadioButton
-                android:id="@+id/rb_water_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="Water 3" />
-
-            <RadioButton
-                android:id="@+id/rb_no_eggs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="No Eggs" />
-
-        </RadioGroup>
-
-    </HorizontalScrollView>
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/swc_shiny"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Shiny?"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/swc_filter_type"
-        app:layout_constraintTop_toTopOf="@id/swc_filter_type" />
-
-    <Button
-        android:id="@+id/btn_pokemon_search"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="See Pokémon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

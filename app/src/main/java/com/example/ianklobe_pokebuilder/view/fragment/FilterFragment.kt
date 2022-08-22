@@ -194,6 +194,7 @@ class FilterFragment: PokeViewModelFragment() {
                     rgTypeOptions.visibility = View.GONE
                     swcShiny.visibility = View.GONE
                     swcFilterType.visibility = View.GONE
+                    rgEggOptions.visibility = View.GONE
                     actvNameFilter.visibility = View.VISIBLE
                     tilNameFilter.visibility = View.VISIBLE
                     actvNameFilter.setText("")
