@@ -4,13 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.ianklobe_pokebuilder.databinding.ActivityMainBinding
-import com.example.ianklobe_pokebuilder.viewmodel.TrainerViewModel
+import com.example.ianklobe_pokebuilder.viewmodel.PokeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: TrainerViewModel by viewModels()
+    private val viewModel: PokeViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

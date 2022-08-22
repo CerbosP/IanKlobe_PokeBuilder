@@ -76,9 +76,14 @@
             app:argType="integer"/>
 
         <argument
+            android:name="egg_filter"
+            android:defaultValue="indeterminate"
+            app:argType="string"/>
+
+        <argument
             android:name="filter_filter"
-            android:defaultValue="false"
-            app:argType="boolean"/>
+            android:defaultValue="0"
+            app:argType="integer"/>
 
     </fragment>
 

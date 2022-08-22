@@ -9,7 +9,13 @@ fun String.getPicUrl(shiny: Boolean): String {
     else "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png"
 }
 
-fun String.extractId() = this.substringAfter("pokemon").replace("/", "").toInt()
+fun String.extractId(): Int {
+    if(this.contains("pokemon-species")) {
+        return this.substringAfter("pokemon-species").replace("/", "").toInt()
+    } else {
+        return this.substringAfter("pokemon").replace("/", "").toInt()
+    }
+}
 
 fun String.formatName(): String {
     return split("-").joinToString(" ") { itOne ->

@@ -1,5 +1,6 @@
 package com.example.ianklobe_pokebuilder.api
 
+import com.example.ianklobe_pokebuilder.model.response.EggResponse
 import com.example.ianklobe_pokebuilder.model.response.PokeResponse
 import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
 import com.example.ianklobe_pokebuilder.model.response.TypeResponse
@@ -25,4 +26,9 @@ interface PokeApi {
     suspend fun getPokemonByType(
         @Path("name") type: String
     ): Response<TypeResponse>
+
+    @GET("egg-group/{name}")
+    suspend fun getEggGroup(
+        @Path("name") group: String
+    ): Response<EggResponse>
 }
