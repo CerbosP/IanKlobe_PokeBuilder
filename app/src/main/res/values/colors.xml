@@ -31,6 +31,11 @@
     <color name="green">#49BB79</color>
     <color name="gray">#878787</color>
 
+    <color name="menu_red">#DB5B4E</color>
+    <color name="menu_green">#5BAB52</color>
+    <color name="menu_yellow">#DAB239</color>
+    <color name="menu_blue">#707CDE</color>
+
     <array name="types_codes">
         <item>@color/bug</item>
         <item>@color/dark</item>

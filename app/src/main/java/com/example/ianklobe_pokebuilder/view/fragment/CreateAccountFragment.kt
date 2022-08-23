@@ -59,7 +59,7 @@ class CreateAccountFragment: PokeViewModelFragment() {
             when (status) {
                 AccountStatus.SUBMITTED -> {
                     findNavController().navigate(
-                        CreateAccountFragmentDirections.actionNavCreateAccountToFilter()
+                        CreateAccountFragmentDirections.actionNavCreateAccountToMenu()
                     )
                     Snackbar.make(binding.root,
                         "Welcome ${viewModel.currentTrainer.value?.email}!",
