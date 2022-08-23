@@ -63,5 +63,8 @@ class ItemListFragment : PokeViewModelFragment() {
     }
 
     private fun openDetails(itemResponseData: ItemResponseData) {
+        viewModel.setItemDetailLoadingState()
+        findNavController().navigate(ItemListFragmentDirections
+            .actionItemListToItemDetail(itemResponseData))
     }
 }

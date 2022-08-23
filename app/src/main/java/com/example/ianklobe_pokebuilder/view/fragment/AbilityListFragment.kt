@@ -60,5 +60,8 @@ class AbilityListFragment : PokeViewModelFragment() {
     }
 
     private fun openDetails(abilityResponseData: AbilityResponseData) {
+        viewModel.setAbilityDetailLoadingState()
+        findNavController().navigate(AbilityListFragmentDirections
+            .actionAbilityListToAbilityDetail(abilityResponseData))
     }
 }

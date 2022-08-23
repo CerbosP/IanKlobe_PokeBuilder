@@ -109,6 +109,25 @@
         android:id="@+id/nav_ability_list"
         android:name="com.example.ianklobe_pokebuilder.view.fragment.AbilityListFragment">
 
+        <action
+            android:id="@+id/action_ability_list_to_ability_detail"
+            app:destination="@id/nav_ability_detail"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_ability_detail"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.AbilityDetailFragment">
+
+        <argument
+            android:name="ability_detail"
+            app:argType="com.example.ianklobe_pokebuilder.model.response.AbilityResponseData"/>
+
+        <action
+            android:id="@+id/action_ability_detail_to_poke_detail"
+            app:destination="@id/nav_poke_detail"
+            app:enterAnim="@anim/slide_right"
+            app:exitAnim="@anim/fade_out"/>
     </fragment>
 
     <fragment
@@ -125,9 +144,27 @@
         android:id="@+id/nav_item_list"
         android:name="com.example.ianklobe_pokebuilder.view.fragment.ItemListFragment">
 
+        <action
+            android:id="@+id/action_item_list_to_item_detail"
+            app:destination="@id/nav_item_detail"/>
+
         <argument
             android:name="item_category"
             app:argType="com.example.ianklobe_pokebuilder.model.response.ItemCategoryResponseData" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_item_detail"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.ItemDetailFragment">
+
+        <action
+            android:id="@+id/action_item_detail_to_poke_detail"
+            app:destination="@id/nav_poke_detail"/>
+
+        <argument
+            android:name="item"
+            app:argType="com.example.ianklobe_pokebuilder.model.response.ItemResponseData"/>
 
     </fragment>
 
