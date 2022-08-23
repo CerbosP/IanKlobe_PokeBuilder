@@ -7,6 +7,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class SpecificAbilityResponseData(
     @SerializedName("effect_entries")
-    val effect: List<AbilityEffect>,
-    val pokemon: List<AbilityPokemon>
+    val effect: List<Effect>,
+    @SerializedName("flavor_text_entries")
+    val flavor: List<FlavorEffect>,
+    val pokemon: List<AbilityPokemon>,
+    val name: String
 ) : Parcelable

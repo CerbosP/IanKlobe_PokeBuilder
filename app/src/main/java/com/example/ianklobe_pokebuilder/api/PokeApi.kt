@@ -32,6 +32,11 @@ interface PokeApi {
     @GET("ability?limit=327")
     suspend fun getAbility(): Response<AbilityResponse>
 
+    @GET("ability/{name}")
+    suspend fun getSingleAbility(
+        @Path("name") ability: String
+    ): Response<SpecificAbilityResponseData>
+
     @GET("item-category?limit=50/")
     suspend fun getItemCategory(): Response<ItemCategoryResponse>
 
@@ -39,4 +44,9 @@ interface PokeApi {
     suspend fun getItems(
         @Path("name") category: String
     ): Response<ItemResponse>
+
+    @GET("item/{name}")
+    suspend fun getSingleItem(
+        @Path("name") item: String
+    ): Response<ItemSpecific>
 }

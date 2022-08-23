@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import javax.inject.Inject
@@ -57,11 +58,17 @@ class PokeViewModel @Inject constructor(
     private val _abilityList = MutableLiveData<UIState>()
     val abilityList: LiveData<UIState> get() = _abilityList
 
+    private val _abilityDetail = MutableLiveData<UIState>()
+    val abilityDetail: LiveData<UIState> get() = _abilityDetail
+
     private val _itemList = MutableLiveData<UIState>()
     val itemList: LiveData<UIState> get() = _itemList
 
     private val _itemCategoryList = MutableLiveData<UIState>()
     val itemCategoryList: LiveData<UIState> get() = _itemCategoryList
+
+    private val _itemDetail = MutableLiveData<UIState>()
+    val itemDetail: LiveData<UIState> get() = _itemDetail
 
     private val _accountStatus = MutableLiveData<AccountStatus>()
     val accountStatus: LiveData<AccountStatus>
@@ -111,6 +118,14 @@ class PokeViewModel @Inject constructor(
         }
     }
 
+    fun getSingleAbility(ability: String) {
+        viewModelSafeScope.launch {
+            repository.getSingleAbility(ability).collect() {
+                _abilityDetail.postValue(it)
+            }
+        }
+    }
+
     fun getItemCategory() {
         viewModelSafeScope.launch {
             repository.getItemCategory().collect {
@@ -127,6 +142,14 @@ class PokeViewModel @Inject constructor(
         }
     }
 
+    fun getSingleItem(item: String) {
+        viewModelSafeScope.launch {
+            repository.getSingleItem(item).collect {
+                _itemDetail.postValue(it)
+            }
+        }
+    }
+
     /*
         Using these set functions to start the opening fragments in the loading state.
         This way they the api is only called when the fragment is first opened.
@@ -137,6 +160,10 @@ class PokeViewModel @Inject constructor(
 
     fun setAbilityLoadingState() {
         _abilityList.value = UIState.Loading
+    }
+
+    fun setAbilityDetailLoadingState() {
+        _abilityDetail.value = UIState.Loading
     }
 
     fun setTypeLoadingState() {
@@ -157,6 +184,10 @@ class PokeViewModel @Inject constructor(
 
     fun setItemCategoryLoadingState() {
         _itemCategoryList.value = UIState.Loading
+    }
+
+    fun setItemDetailLoadingState() {
+        _itemDetail.value = UIState.Loading
     }
 
     fun createTrainer(email: String, password: String) {

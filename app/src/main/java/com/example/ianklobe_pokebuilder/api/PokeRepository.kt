@@ -12,8 +12,10 @@ interface PokeRepository {
     suspend fun getPokemonByType(type: String): Flow<UIState>
     suspend fun getEggGroup(group: String): Flow<UIState>
     suspend fun getAbility(): Flow<UIState>
+    suspend fun getSingleAbility(ability: String): Flow<UIState>
     suspend fun getItemCategory(): Flow<UIState>
     suspend fun getItems(category: String): Flow<UIState>
+    suspend fun getSingleItem(item: String): Flow<UIState>
 }
 
 class PokeRepositoryImpl @Inject constructor(private val pokeApi: PokeApi) : PokeRepository {
@@ -97,6 +99,22 @@ class PokeRepositoryImpl @Inject constructor(private val pokeApi: PokeApi) : Pok
             }
         }
 
+    override suspend fun getSingleAbility(ability: String): Flow<UIState> =
+        flow {
+            try {
+                val response = pokeApi.getSingleAbility(ability = ability)
+                if (response.isSuccessful) {
+                    emit(response.body()?.let {
+                        UIState.Success(it)
+                    } ?: throw Exception("Null Response"))
+                } else {
+                    throw Exception("Failed network call")
+                }
+            } catch (e: Exception) {
+                emit(UIState.Error(e))
+            }
+        }
+
     override suspend fun getItemCategory(): Flow<UIState> =
         flow {
             try {
@@ -117,6 +135,22 @@ class PokeRepositoryImpl @Inject constructor(private val pokeApi: PokeApi) : Pok
         flow {
             try {
                 val response = pokeApi.getItems(category = category)
+                if (response.isSuccessful) {
+                    emit(response.body()?.let {
+                        UIState.Success(it)
+                    } ?: throw Exception("Null Response"))
+                } else {
+                    throw Exception("Failed network call")
+                }
+            } catch (e: Exception) {
+                emit(UIState.Error(e))
+            }
+        }
+
+    override suspend fun getSingleItem(item: String): Flow<UIState> =
+        flow {
+            try {
+                val response = pokeApi.getSingleItem(item = item)
                 if (response.isSuccessful) {
                     emit(response.body()?.let {
                         UIState.Success(it)
