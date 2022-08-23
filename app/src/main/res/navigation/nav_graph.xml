@@ -9,8 +9,8 @@
         android:name="com.example.ianklobe_pokebuilder.view.fragment.LogInFragment">
 
         <action
-            android:id="@+id/action_log_in_to_filter"
-            app:destination="@id/nav_filter" />
+            android:id="@+id/action_log_in_to_menu"
+            app:destination="@id/nav_menu" />
 
         <action
             android:id="@+id/action_log_in_to_create_account"
@@ -25,8 +25,26 @@
         android:name="com.example.ianklobe_pokebuilder.view.fragment.CreateAccountFragment">
 
         <action
-            android:id="@+id/action_nav_create_account_to_filter"
-            app:destination="@id/nav_filter" />
+            android:id="@+id/action_nav_create_account_to_menu"
+            app:destination="@id/nav_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_menu"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.MenuFragment">
+
+        <action
+            android:id="@+id/action_nav_menu_to_filter"
+            app:destination="@id/nav_filter"/>
+
+        <action
+            android:id="@+id/action_nav_menu_to_ability_list"
+            app:destination="@id/nav_ability_list"/>
+
+        <action
+            android:id="@+id/action_nav_menu_to_category_list"
+            app:destination="@id/nav_item_category_list"/>
+
     </fragment>
 
     <fragment
@@ -84,6 +102,32 @@
             android:name="filter_filter"
             android:defaultValue="0"
             app:argType="integer"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_ability_list"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.AbilityListFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_item_category_list"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.ItemCategoryListFragment">
+
+        <action
+            android:id="@+id/action_category_list_to_item_list"
+            app:destination="@id/nav_item_list"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_item_list"
+        android:name="com.example.ianklobe_pokebuilder.view.fragment.ItemListFragment">
+
+        <argument
+            android:name="item_category"
+            app:argType="com.example.ianklobe_pokebuilder.model.response.ItemCategoryResponseData" />
 
     </fragment>
 

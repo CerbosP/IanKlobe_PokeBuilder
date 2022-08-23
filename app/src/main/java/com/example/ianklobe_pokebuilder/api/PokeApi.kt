@@ -1,9 +1,6 @@
 package com.example.ianklobe_pokebuilder.api
 
-import com.example.ianklobe_pokebuilder.model.response.EggResponse
-import com.example.ianklobe_pokebuilder.model.response.PokeResponse
-import com.example.ianklobe_pokebuilder.model.response.SinglePokeResponse
-import com.example.ianklobe_pokebuilder.model.response.TypeResponse
+import com.example.ianklobe_pokebuilder.model.response.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -31,4 +28,15 @@ interface PokeApi {
     suspend fun getEggGroup(
         @Path("name") group: String
     ): Response<EggResponse>
+
+    @GET("ability?limit=327")
+    suspend fun getAbility(): Response<AbilityResponse>
+
+    @GET("item-category?limit=50/")
+    suspend fun getItemCategory(): Response<ItemCategoryResponse>
+
+    @GET("item-category/{name}")
+    suspend fun getItems(
+        @Path("name") category: String
+    ): Response<ItemResponse>
 }

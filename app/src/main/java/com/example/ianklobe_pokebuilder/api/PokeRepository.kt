@@ -11,6 +11,9 @@ interface PokeRepository {
     suspend fun getSinglePokemon(name: String): Flow<UIState>
     suspend fun getPokemonByType(type: String): Flow<UIState>
     suspend fun getEggGroup(group: String): Flow<UIState>
+    suspend fun getAbility(): Flow<UIState>
+    suspend fun getItemCategory(): Flow<UIState>
+    suspend fun getItems(category: String): Flow<UIState>
 }
 
 class PokeRepositoryImpl @Inject constructor(private val pokeApi: PokeApi) : PokeRepository {
@@ -78,4 +81,51 @@ class PokeRepositoryImpl @Inject constructor(private val pokeApi: PokeApi) : Pok
             }
         }
 
+    override suspend fun getAbility(): Flow<UIState> =
+        flow {
+            try {
+                val response = pokeApi.getAbility()
+                if (response.isSuccessful) {
+                    emit(response.body()?.let {
+                        UIState.Success(it)
+                    } ?: throw Exception("Null Repsonse"))
+                } else {
+                    throw Exception("Failed network call")
+                }
+            } catch (e: Exception) {
+                emit(UIState.Error(e))
+            }
+        }
+
+    override suspend fun getItemCategory(): Flow<UIState> =
+        flow {
+            try {
+                val response = pokeApi.getItemCategory()
+                if (response.isSuccessful) {
+                    emit(response.body()?.let {
+                        UIState.Success(it)
+                    } ?: throw Exception("Null Response"))
+                } else {
+                    throw Exception("Failed network call")
+                }
+            } catch (e: Exception) {
+                emit(UIState.Error(e))
+            }
+        }
+
+    override suspend fun getItems(category: String): Flow<UIState> =
+        flow {
+            try {
+                val response = pokeApi.getItems(category = category)
+                if (response.isSuccessful) {
+                    emit(response.body()?.let {
+                        UIState.Success(it)
+                    } ?: throw Exception("Null Response"))
+                } else {
+                    throw Exception("Failed network call")
+                }
+            } catch (e: Exception) {
+                emit(UIState.Error(e))
+            }
+        }
 }

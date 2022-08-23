@@ -45,7 +45,7 @@ class LogInFragment: PokeViewModelFragment() {
 
         binding.btnDebug.setOnClickListener {
             findNavController().navigate(LogInFragmentDirections
-                .actionLogInToFilter())
+                .actionLogInToMenu())
         }
 
         return binding.root
@@ -95,7 +95,7 @@ class LogInFragment: PokeViewModelFragment() {
 
     private fun moveToFilters() {
         findNavController().navigate(LogInFragmentDirections
-            .actionLogInToFilter())
+            .actionLogInToMenu())
     }
 
     override fun onResume() {

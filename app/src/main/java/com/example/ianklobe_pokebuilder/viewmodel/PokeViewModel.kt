@@ -54,6 +54,15 @@ class PokeViewModel @Inject constructor(
     private val _pokeEggList = MutableLiveData<UIState>()
     val pokeEgg: LiveData<UIState> get() = _pokeEggList
 
+    private val _abilityList = MutableLiveData<UIState>()
+    val abilityList: LiveData<UIState> get() = _abilityList
+
+    private val _itemList = MutableLiveData<UIState>()
+    val itemList: LiveData<UIState> get() = _itemList
+
+    private val _itemCategoryList = MutableLiveData<UIState>()
+    val itemCategoryList: LiveData<UIState> get() = _itemCategoryList
+
     private val _accountStatus = MutableLiveData<AccountStatus>()
     val accountStatus: LiveData<AccountStatus>
         get() = _accountStatus
@@ -94,12 +103,40 @@ class PokeViewModel @Inject constructor(
         }
     }
 
+    fun getAbility() {
+        viewModelSafeScope.launch {
+            repository.getAbility().collect {
+                _abilityList.postValue(it)
+            }
+        }
+    }
+
+    fun getItemCategory() {
+        viewModelSafeScope.launch {
+            repository.getItemCategory().collect {
+                _itemCategoryList.postValue(it)
+            }
+        }
+    }
+
+    fun getItems(category: String) {
+        viewModelSafeScope.launch {
+            repository.getItems(category).collect {
+                _itemList.postValue(it)
+            }
+        }
+    }
+
     /*
         Using these set functions to start the opening fragments in the loading state.
         This way they the api is only called when the fragment is first opened.
      */
     fun setPokeLoadingState() {
         _pokeList.value = UIState.Loading
+    }
+
+    fun setAbilityLoadingState() {
+        _abilityList.value = UIState.Loading
     }
 
     fun setTypeLoadingState() {
@@ -112,6 +149,14 @@ class PokeViewModel @Inject constructor(
 
     fun setDetailLoadingState() {
         _pokeDetails.value = UIState.Loading
+    }
+
+    fun setItemLoadingState() {
+        _itemList.value = UIState.Loading
+    }
+
+    fun setItemCategoryLoadingState() {
+        _itemCategoryList.value = UIState.Loading
     }
 
     fun createTrainer(email: String, password: String) {

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/logo_blue">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibtn_back_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_button"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:text="PokéBuilder"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_trainer_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="25dp"
+        android:drawableTop="@drawable/trainer"
+        android:text="TRAINER"
+        android:textStyle="bold"
+        android:backgroundTint="@color/menu_red"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_ability_menu"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_pokemon_menu"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_pokemon_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="25dp"
+        android:drawableTop="@drawable/pokemon"
+        android:text="POKÉMON"
+        android:textStyle="bold"
+        android:backgroundTint="@color/menu_green"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_item_menu"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_trainer_menu"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_ability_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="25dp"
+        android:drawableBottom="@drawable/ability"
+        android:text="ABILITIES"
+        android:textStyle="bold"
+        android:backgroundTint="@color/menu_yellow"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5dp"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_trainer_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_item_menu"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_item_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="25dp"
+        android:drawableBottom="@drawable/item"
+        android:text="ITEMS"
+        android:textStyle="bold"
+        android:backgroundTint="@color/menu_blue"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5dp"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_pokemon_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_ability_menu"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
